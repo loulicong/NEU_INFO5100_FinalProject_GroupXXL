@@ -4,18 +4,25 @@
  */
 package userinterface;
 
-import Business.User.UserDirectory;
-import Business.GODoc.GODocDirectory;
-import Business.EcoSystem;
-import Business.DB4OUtil.DB4OUtil;
+import System.City.City;
+import System.City.CityList;
+import System.Community.Community;
+import System.Community.CommunityList;
+import System.Hospital.Hospital;
+import System.PRC.PRC;
+import System.PRC.PRCDirectory;
+import System.User.UserDirectory;
+import System.GODoc.GODocDirectory;
+import System.EcoSystem;
+import System.DB4OUtil.DB4OUtil;
 
-import Business.PEDoc.PEDoc;
-import Business.Hospital.HospitalDirectory;
-import Business.Role.*;
-import Business.UserAccount.UserAccount;
-import Business.UserAccount.UserAccountDirectory;
-import Business.InRequest.InRequestList;
-import Business.InRequest.InRequest;
+import System.PEDoc.PEDoc;
+import System.Hospital.HospitalDirectory;
+import System.Role.*;
+import System.UserAccount.UserAccount;
+import System.UserAccount.UserAccountDirectory;
+import System.InRequest.InRequestList;
+import System.InRequest.InRequest;
 
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -39,33 +46,45 @@ public class MainJFrame extends javax.swing.JFrame {
     public void initialize(){
         this.system = EcoSystem.getInstance();
         this.userAccountDirectory=new UserAccountDirectory();
+
         Role role_1 = new HospitalAdminRole();
-        PEDoc PEDoc_1 =new PEDoc();
+        Hospital hospital =new Hospital();
+        hospital.setName("hospital_1");
         HospitalDirectory hospitalDirectory = new HospitalDirectory();
-        hospitalDirectory.createRestaurant("restaurant_1");
-        ArrayList<String> menu =new ArrayList<>();
-        menu.add("rice");
-        menu.add("chiken");
-        menu.add("beef");
-        hospitalDirectory.getRestaurantArrayList().get(0).setMenu(menu);
-        UserAccount userAccount_1=userAccountDirectory.createUserAccount("restaurant_1","123", PEDoc_1,role_1);
+        hospitalDirectory.getHospitalArrayList().add(hospital);
+        UserAccount userAccount_1=userAccountDirectory.createUserAccount("hospital_1","123", role_1);
+
+        Role role_5 = new PRCAdminRole();
+        PRCDirectory prcDirectory = new PRCDirectory();
+        PRC prc =new PRC();
+        prc.setName("PRC_1");
+        prcDirectory.getPRCArrayList().add(prc);
+        UserAccount userAccount_5=userAccountDirectory.createUserAccount("PRC_1","123", role_5);
 
         Role role_2 = new GODoctorRole();
-        PEDoc PEDoc_2 = new PEDoc();
         GODocDirectory GODocDirectory = new GODocDirectory();
         GODocDirectory.createDeliverMan("deliverman_1");
-        UserAccount userAccount_2=userAccountDirectory.createUserAccount("deliverman_1","123", PEDoc_2,role_2);
+        UserAccount userAccount_2=userAccountDirectory.createUserAccount("deliverman_1","123",role_2);
 
         Role role_3 = new PregnantRole();
-        PEDoc PEDoc_3 = new PEDoc();
         UserDirectory userDirectory =new UserDirectory();
-        userDirectory.createCustomer("customer_1");
-        UserAccount userAccount_3=userAccountDirectory.createUserAccount("customer_1","123", PEDoc_3,role_3);
+        userDirectory.createCustomer("customer_1","Florence");
+        system.setUserDirectory(userDirectory);
+        UserAccount userAccount_3=userAccountDirectory.createUserAccount("customer_1","123", role_3);
 
-        InRequest inRequest_1 =new InRequest("",userAccount_3,null,"available", hospitalDirectory.getRestaurantArrayList().get(0),null);
-        InRequest inRequest =new InRequest("",userAccount_3,userAccount_2,"pending", hospitalDirectory.getRestaurantArrayList().get(0),null);
+        InRequest inRequest_1 =new InRequest("",userAccount_3,null,"available", hospitalDirectory.getHospitalArrayList().get(0),null);
+        InRequest inRequest =new InRequest("",userAccount_3,userAccount_2,"pending", hospitalDirectory.getHospitalArrayList().get(0),null);
 
-        this.system=new EcoSystem(hospitalDirectory, userDirectory, GODocDirectory);
+        CityList cityList =new CityList();
+        City city = new City("boston");
+        cityList.getCityArrayList().add(city);
+
+        Community community = new Community("malden");
+        CommunityList communityList = new CommunityList();
+        communityList.getCommunityArrayList().add(community);
+        city.setCommunityArrayList(communityList.getCommunityArrayList());
+
+        this.system=new EcoSystem(hospitalDirectory, userDirectory, GODocDirectory,prcDirectory,cityList);
         inRequestList = new InRequestList();
         system.setWorkQueue(inRequestList);
         system.getWorkQueue().getWorkRequestList().add((inRequest));
@@ -74,8 +93,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
 
         Role role_4 = new SystemAdminRole();
-        PEDoc PEDoc_4 = new PEDoc();
-        UserAccount userAccount_4=userAccountDirectory.createUserAccount("admin_1","123", PEDoc_4,role_4);
+        UserAccount userAccount_4=userAccountDirectory.createUserAccount("admin_1","123", role_4);
         system.setUserAccountDirectory(this.userAccountDirectory);
         dB4OUtil.storeSystem(system);
     }
@@ -107,8 +125,16 @@ public class MainJFrame extends javax.swing.JFrame {
         loginJLabel = new javax.swing.JLabel();
         logoutJButton = new javax.swing.JButton();
         container = new javax.swing.JPanel();
+        registerJButton = new JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        registerJButton.setText("register");
+        registerJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerJButtonActionPerformed(evt);
+            }
+        });
 
         loginJButton.setText("Login");
         loginJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +171,9 @@ public class MainJFrame extends javax.swing.JFrame {
                             .addComponent(logoutJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                             .addGap(26, 26, 26)
                             .addComponent(loginJLabel)))
+                            .addComponent(registerJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                     .addComponent(loginJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,6 +191,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(loginJButton)
                 .addGap(34, 34, 34)
                 .addComponent(logoutJButton)
+                    .addGap(34, 34, 34)
+                    .addComponent(registerJButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loginJLabel)
                 .addContainerGap(187, Short.MAX_VALUE))
@@ -202,6 +232,14 @@ public class MainJFrame extends javax.swing.JFrame {
         // Get user name
        
     }//GEN-LAST:event_loginJButtonActionPerformed
+
+    private void registerJButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        RegisterJPanel registerJPanel = new RegisterJPanel(container,system);
+        container.add(registerJPanel);
+        CardLayout crdLyt = (CardLayout) container.getLayout();
+        crdLyt.next(container);
+        jSplitPane1.setRightComponent(container);
+    }
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutJButtonActionPerformed
         logoutJButton.setEnabled(false);
@@ -266,5 +304,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton logoutJButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField userNameJTextField;
+    private javax.swing.JButton registerJButton;
     // End of variables declaration//GEN-END:variables
 }

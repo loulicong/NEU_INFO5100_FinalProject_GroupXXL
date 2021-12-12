@@ -4,7 +4,7 @@
  */
 package userinterface.DeliveryManRole;
 
-import Business.InRequest.InRequest;
+import System.InRequest.InRequest;
 
 import java.awt.CardLayout;
 import java.awt.Component;
