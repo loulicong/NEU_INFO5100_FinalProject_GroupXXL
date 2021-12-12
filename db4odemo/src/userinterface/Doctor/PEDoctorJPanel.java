@@ -8,6 +8,8 @@ package userinterface.Doctor;
 import System.Baby.Baby;
 import System.BabyInfo.BabyInfo;
 import System.CareCenterSystem;
+import System.GODoc.GODoc;
+import System.PEDoc.PEDoc;
 import System.PregnantInfo.PregnantInfo;
 import System.UserAccount.UserAccount;
 
@@ -172,6 +174,10 @@ public class PEDoctorJPanel extends JPanel {
         p.setName(jTextField1.getText());
         p.setBaby(system.getBabyDirectory().search(jTextField2.getText()));
         system.getBabyDirectory().search(jTextField2.getText()).getBabyinfoDirectory().getBabyInfoArrayList().add(p);
+        JOptionPane.showMessageDialog(this,"successfully submit");
+        jTextField1.setText("");
+        jTextField2.setText("");
+
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -182,6 +188,10 @@ public class PEDoctorJPanel extends JPanel {
 
         DefaultTableModel model = (DefaultTableModel) tbDes.getModel();
         model.setRowCount(0);
+        PEDoc peDoc = system.getPEdocDirectory().search(userAccount.getUsername());
+        if (peDoc.getPregnant()==null){
+            JOptionPane.showMessageDialog(this,"Have no pregnant!");
+        }
         if(system.getPEdocDirectory().search(userAccount.getUsername())==null||system.getPEdocDirectory().search(userAccount.getUsername()).getPregnant()==null||system.getPEdocDirectory().search(userAccount.getUsername()).getPregnant().getPregnantInfoArrayList()==null){
             Object[] row = new Object[2];
             model.addRow(row);

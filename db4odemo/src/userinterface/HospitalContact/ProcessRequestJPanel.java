@@ -377,6 +377,8 @@ public class ProcessRequestJPanel extends JPanel {
         int selectedRow=RequestJTable.getSelectedRow();
         GOdocList.searchGODoc(jLabel1.getText()).setStatu("Busy");
         PEDdocList.searchPEDoc(jLabel2.getText()).setStatu("Busy");
+        system.getPEdocDirectory().searchName(jLabel2.getText()).setPregnant(pregnantArrayList.get(selectedRow));
+        system.getGODocDirectory().searchName(jLabel1.getText()).setPregnant(pregnantArrayList.get(selectedRow));
         GOdocList.searchGODoc(jLabel1.getText()).setPregnant(pregnantArrayList.get(selectedRow));
         PEDdocList.searchPEDoc(jLabel2.getText()).setPregnant(pregnantArrayList.get(selectedRow));
         system.getUserAccountDirectory().searchUserAccount(jLabel3.getText()).getHospitalinRequestListt().searchRequest(hospital).setStatus("Accepted");

@@ -55,4 +55,16 @@ public class PEDocDirectory {
         }
         return null;
     }
+    public PEDoc searchName(String name){
+        if (PEDocList==null){
+            return null;
+        }
+        for(PEDoc go:PEDocList){
+            if(go.getName().equals(name)){
+                return go;
+            }
+        }
+        return null;
+    }
+
 }

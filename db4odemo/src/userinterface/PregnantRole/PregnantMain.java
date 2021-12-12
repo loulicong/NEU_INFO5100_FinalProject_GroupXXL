@@ -4,11 +4,13 @@
  */
 package userinterface.PregnantRole;
 
+import System.BabyNurse.BabyNurse;
 import System.CareCenterSystem;
 
 import System.GODNurse.GODNurse;
 import System.GODoc.GODoc;
 import System.Hospital.Hospital;
+import System.PEDoc.PEDoc;
 import System.UserAccount.UserAccount;
 import System.InRequest.InRequest;
 import System.Pregnant.Pregnant;
@@ -226,10 +228,10 @@ public class PregnantMain extends javax.swing.JPanel {
                 goDoc.setStatu("Free");
             }
         }
-        for(GODNurse godNurse:system.getGodNurseDirectory().getDeliveryManArrayList()){
-            if(userAccount.getUsername().equals(godNurse.getPregnant().getUsername())){
-                godNurse.setPregnant(null);
-                godNurse.setStatu("Free");
+        for(PEDoc peDoc:system.getPEdocDirectory().getEmployeeList()){
+            if(userAccount.getUsername().equals(peDoc.getPregnant().getUsername())){
+                peDoc.setPregnant(null);
+                peDoc.setStatu("Free");
             }
         }
 //        Pregnant pregnant=system.getPregnantDirectory().searchPregnant(userAccount.getUsername());
@@ -262,6 +264,18 @@ public class PregnantMain extends javax.swing.JPanel {
             if(ischanged==false){
                 JOptionPane.showMessageDialog(this,"no hospital to out");
                 return;
+            }
+            for(PEDoc s:system.getPEdocDirectory().getEmployeeList()){
+                if(userAccount.getUsername().equals(s.getPregnant().getUsername())){
+                    s.setPregnant(null);
+                    s.setStatu("Free");
+                }
+            }
+            for(BabyNurse s:system.getBabyNurseDirectory().getDeliveryManArrayList()){
+                if(userAccount.getUsername().equals(s.getPregnant().getUsername())){
+                    s.setPregnant(null);
+                    s.setStatu("Free");
+                }
             }
         }
 

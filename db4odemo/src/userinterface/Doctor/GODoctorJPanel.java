@@ -268,15 +268,20 @@ public class GODoctorJPanel extends JPanel {
             return;
         }
         PregnantInfo p=new PregnantInfo();
-        SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间
-        sdf.applyPattern("yyyy-MM-dd HH:mm:ss a");// a为am/pm的标记
-        Date date = new Date();// 获取当前时间
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        sdf.applyPattern("yyyy-MM-dd HH:mm:ss a");
+        Date date = new Date();
         p.setCheckdate(sdf.format(date));
         p.setDescription(jTextField1.getText());
         p.setImage(txtImagePath.getText());
         p.setPregnant(system.getPregnantDirectory().searchPregnant(jTextField2.getText()));
-        system.getPregnantDirectory().searchPregnant(userAccount.getUsername()).getPregnantInfoArrayList().add(p);
+        GODoc goDoc = system.getGODocDirectory().search(userAccount.getUsername());
+        system.getPregnantDirectory().searchPregnant(goDoc.getPregnant().getUsername()).getPregnantInfoArrayList().add(p);
         system.getPregnantInfoDirectory().createPregnanInfo(jTextField1.getText(),sdf.format(date), txtImagePath.getText(), system.getPregnantDirectory().searchPregnant(userAccount.getUsername()));
+        JOptionPane.showMessageDialog(this,"successfully submit");
+        jTextField1.setText("");
+        jTextField2.setText("");
+        txtImagePath.setText("");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void txtImagePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImagePathActionPerformed
@@ -315,28 +320,36 @@ public class GODoctorJPanel extends JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void populateTable() {
 
+    private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tbDes.getModel();
         model.setRowCount(0);
+        GODoc goDoc = system.getGODocDirectory().search(userAccount.getUsername());
+        if (goDoc.getPregnant()==null){
+            JOptionPane.showMessageDialog(this,"Have no pregnant!");
+        }
         if(system.getGODocDirectory().search(userAccount.getUsername())==null||system.getGODocDirectory().search(userAccount.getUsername()).getPregnant()==null||system.getGODocDirectory().search(userAccount.getUsername()).getPregnant().getPregnantInfoArrayList()==null){
             Object[] row = new Object[2];
             model.addRow(row);
         }
         else{
-            GODoc goDoc = system.getGODocDirectory().search(userAccount.getUsername());
+            if(goDoc.getPregnant().getPregnantInfoArrayList()==null){
+                Object[] row = new Object[3];
+                model.addRow(row);
+                return;
+            }
             for(PregnantInfo pregnantinfo:goDoc.getPregnant().getPregnantInfoArrayList()){
-                Object[] row = new Object[2];
+                Object[] row = new Object[3];
                 row[0]=pregnantinfo;
-                row[1]=pregnantinfo.getPregnant().getUsername();
+                row[1]=goDoc.getPregnant().getUsername();
                 row[2]=pregnantinfo.getDescription();
                 model.addRow(row);
-
             }
 
         }
 
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;

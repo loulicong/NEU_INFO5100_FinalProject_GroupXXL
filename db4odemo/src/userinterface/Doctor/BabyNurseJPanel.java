@@ -7,7 +7,9 @@ package userinterface.Doctor;
 
 import System.Baby.Baby;
 import System.BabyInfo.BabyInfo;
+import System.BabyNurse.BabyNurse;
 import System.CareCenterSystem;
+import System.GODoc.GODoc;
 import System.UserAccount.UserAccount;
 
 import javax.swing.*;
@@ -170,6 +172,10 @@ public class BabyNurseJPanel extends JPanel {
         p.setName(jTextField1.getText());
         p.setBaby(system.getBabyDirectory().search(jTextField2.getText()));
         system.getBabyDirectory().search(jTextField2.getText()).getBabyinfoDirectory().getBabyInfoArrayList().add(p);
+        JOptionPane.showMessageDialog(this,"successfully submit");
+        jTextField1.setText("");
+        jTextField2.setText("");
+        
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -180,6 +186,10 @@ public class BabyNurseJPanel extends JPanel {
 
         DefaultTableModel model = (DefaultTableModel) tbDes.getModel();
         model.setRowCount(0);
+        BabyNurse babyNurse= system.getBabyNurseDirectory().search(userAccount.getUsername());
+        if (babyNurse.getPregnant()==null){
+            JOptionPane.showMessageDialog(this,"Have no pregnant!");
+        }
         if (system.getBabyNurseDirectory().search(userAccount.getUsername()) == null || system.getBabyNurseDirectory().search(userAccount.getUsername()).getPregnant() == null || system.getBabyNurseDirectory().search(userAccount.getUsername()).getPregnant().getBabyArrayList() == null) {
             Object[] row = new Object[2];
             model.addRow(row);

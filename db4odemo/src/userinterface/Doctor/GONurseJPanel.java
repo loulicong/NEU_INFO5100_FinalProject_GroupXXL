@@ -6,6 +6,8 @@
 package userinterface.Doctor;
 
 import System.CareCenterSystem;
+import System.GODNurse.GODNurse;
+import System.GODoc.GODoc;
 import System.PregnantInfo.PregnantInfo;
 import System.UserAccount.UserAccount;
 
@@ -276,6 +278,9 @@ public class GONurseJPanel extends JPanel {
         p.setPregnant(system.getPregnantDirectory().searchPregnant(jTextField2.getText()));
         system.getPregnantDirectory().searchPregnant(userAccount.getUsername()).getPregnantInfoArrayList().add(p);
         system.getPregnantInfoDirectory().createPregnanInfo(jTextField1.getText(),sdf.format(date), txtImagePath.getText(), system.getPregnantDirectory().searchPregnant(userAccount.getUsername()));
+        JOptionPane.showMessageDialog(this,"successfully submit");
+        jTextField1.setText("");
+        jTextField2.setText("");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void txtImagePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImagePathActionPerformed
@@ -304,6 +309,7 @@ public class GONurseJPanel extends JPanel {
 
 
 
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -318,6 +324,10 @@ public class GONurseJPanel extends JPanel {
 
         DefaultTableModel model = (DefaultTableModel) tbDes.getModel();
         model.setRowCount(0);
+        GODNurse godNurse = system.getGodNurseDirectory().search(userAccount.getUsername());
+        if (godNurse.getPregnant()==null){
+            JOptionPane.showMessageDialog(this,"Have no pregnant!");
+        }
         if(system.getGODocDirectory().search(userAccount.getUsername())==null||system.getGODocDirectory().search(userAccount.getUsername()).getPregnant()==null||system.getGODocDirectory().search(userAccount.getUsername()).getPregnant().getPregnantInfoArrayList()==null){
             Object[] row = new Object[2];
             model.addRow(row);
