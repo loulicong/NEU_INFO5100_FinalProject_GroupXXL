@@ -4,9 +4,9 @@
  */
 package userinterface.RestaurantAdminRole;
 
-import Business.EcoSystem;
-import Business.Hospital.Hospital;
-import Business.UserAccount.UserAccount;
+import System.EcoSystem;
+import System.Hospital.Hospital;
+import System.UserAccount.UserAccount;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -34,9 +34,9 @@ public class MenuJPanel extends JPanel {
         this.userAccount = userAccount;
         String name = userAccount.getUsername();
         hospital = new Hospital();
-        for(int i =0;i<business.getRestaurantDirectory().getRestaurantArrayList().size();i++){
-            if (name.equals(business.getRestaurantDirectory().getRestaurantArrayList().get(i).getName())){
-                hospital =business.getRestaurantDirectory().getRestaurantArrayList().get(i);
+        for(int i = 0; i<business.getHospitalDirectory().getHospitalArrayList().size(); i++){
+            if (name.equals(business.getHospitalDirectory().getHospitalArrayList().get(i).getName())){
+                hospital =business.getHospitalDirectory().getHospitalArrayList().get(i);
             }
         }
         populateTable();
@@ -210,13 +210,13 @@ public class MenuJPanel extends JPanel {
                     } else {
                         temp_name = (String) model.getValueAt(i, j);
                     }
-                    Hospital s = business.getRestaurantDirectory().getRestaurantArrayList().get(i);
+                    Hospital s = business.getHospitalDirectory().getHospitalArrayList().get(i);
                     for (UserAccount v : business.getUserAccountDirectory().getUserAccountList()) {
                         if (s.getName().equals(v.getUsername())) {
                             business.getUserAccountDirectory().getUserAccountList().get(i).setUsername(temp_name);
                         }
                     }
-                    business.getRestaurantDirectory().getRestaurantArrayList().get(i).setName(temp_name);
+                    business.getHospitalDirectory().getHospitalArrayList().get(i).setName(temp_name);
 
                 }
                 if (j == 1) {
@@ -228,7 +228,7 @@ public class MenuJPanel extends JPanel {
                     } else {
                         password = (String) model.getValueAt(i, j);
                     }
-                    Hospital s = business.getRestaurantDirectory().getRestaurantArrayList().get(i);
+                    Hospital s = business.getHospitalDirectory().getHospitalArrayList().get(i);
                     for (UserAccount v : business.getUserAccountDirectory().getUserAccountList()) {
                         if (s.getName().equals(v.getUsername())) {
                             business.getUserAccountDirectory().getUserAccountList().get(i).setPassword(password);

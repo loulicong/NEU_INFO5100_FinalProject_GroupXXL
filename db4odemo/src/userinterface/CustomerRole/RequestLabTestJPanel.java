@@ -4,8 +4,8 @@
  */
 package userinterface.CustomerRole;
 
-import Business.UserAccount.UserAccount;
-import Business.InRequest.InRequest;
+import System.UserAccount.UserAccount;
+import System.InRequest.InRequest;
 
 import java.awt.CardLayout;
 import java.awt.Component;

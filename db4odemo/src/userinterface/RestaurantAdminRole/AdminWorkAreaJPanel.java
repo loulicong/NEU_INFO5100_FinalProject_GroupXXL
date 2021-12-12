@@ -3,8 +3,8 @@
 package userinterface.RestaurantAdminRole;
 
 
-import Business.EcoSystem;
-import Business.UserAccount.UserAccount;
+import System.EcoSystem;
+import System.UserAccount.UserAccount;
 
 import javax.swing.JPanel;
 import java.awt.*;
