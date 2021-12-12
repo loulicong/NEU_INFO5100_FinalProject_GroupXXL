@@ -33,6 +33,9 @@ public class PRCContactDirectory {
     }
 
     public PRCContact searchContact(String name){
+        if(PRCContactList==null){
+            return null;
+        }
         for(PRCContact c:PRCContactList){
             if(c.getUsername().equals(name)){
                 return c;

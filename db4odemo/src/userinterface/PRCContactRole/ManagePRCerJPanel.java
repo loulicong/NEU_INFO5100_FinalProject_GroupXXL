@@ -77,7 +77,7 @@ public class ManagePRCerJPanel extends JPanel {
             row[2]=ped.getUsrname();
             row[3]=ped.getPassword();
             row[4]=ped.getStatu();
-            model2.addRow(row);
+            model3.addRow(row);
         }
     }
 
@@ -277,8 +277,8 @@ public class ManagePRCerJPanel extends JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManagePRCerJPanel dwjp = (ManagePRCerJPanel) component;
-        dwjp.populateTable();
+        PRCContactMain dwjp = (PRCContactMain) component;
+        dwjp.populateRequestTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_BackbtnActionPerformed

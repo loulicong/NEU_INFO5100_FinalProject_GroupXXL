@@ -35,6 +35,9 @@ public class PRC_PED {
     }
 
     public BabyNurse searchPEDoc(String name){
+        if (BabyNurseList==null){
+            return null;
+        }
         for(BabyNurse ped:BabyNurseList){
             if(ped.getName().equals(name)){
                 return ped;

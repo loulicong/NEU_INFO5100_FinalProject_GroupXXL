@@ -8,10 +8,12 @@ import System.City.City;
 import System.Community.Community;
 import System.Hospital.Hospital;
 import System.CareCenterSystem;
+import System.Hospital_GO.Hospital_GO;
 import System.PRC.PRC;
 import System.Pregnant.Pregnant;
 import System.Role.HospitalAdminRole;
 import System.Role.PRCAdminRole;
+import System.Role.PRCContactRole;
 import System.Role.Role;
 import System.UserAccount.UserAccount;
 
@@ -229,18 +231,19 @@ public class CRUDJPanel extends JPanel {
         String combox = (String) roleComboBox.getSelectedItem();
         if (combox.equals("hospital")) {
             {
-                business.getHospitalDirectory().createHospital(usernameTextfield.getText());
                 Role role_2 = new HospitalAdminRole();
                 String passWord = passwordTextfield.getText();
                 Hospital hospital = new Hospital();
                 hospital.setName(usernameTextfield.getText());
                 boolean isadded=false;
+                business.getHospitalDirectory().getHospitalArrayList().add(hospital);
                 for (City s : business.getCityList().getCityArrayList()) {
                     if (s.getName().equals(cityTextfield.getText())) {
                         for (Community v : s.getCommunityArrayList()) {
                             if (v.getName().equals(communityTextfield.getText())){
                                 v.getHospitalArrayList().add(hospital);
                             isadded = true;
+                            hospital.getHospitalContact().setHospital(hospital);
                         }
                         }
                     }
@@ -261,7 +264,7 @@ public class CRUDJPanel extends JPanel {
                 PRC prc = new PRC();
                 prc.setName(usernameTextfield.getText());
                 business.getPRCDirectory().getPRCtArrayList().add(prc);
-                Role role_2=new PRCAdminRole();
+                Role role_2=new PRCContactRole();
                 String passWord = passwordTextfield.getText();
                 business.getUserAccountDirectory().createUserAccount(userName,passWord,role_2);
                 boolean isadded=false;
@@ -271,6 +274,7 @@ public class CRUDJPanel extends JPanel {
                             if (v.getName().equals(communityTextfield.getText())) {
                                 v.getPrcArrayList().add(prc);
                                 isadded = true;
+                                prc.getPrcContact().setPrc(prc);
                             }
                         }
                     }

@@ -300,14 +300,22 @@ public class GONurseJPanel extends JPanel {
         
         DefaultTableModel model = (DefaultTableModel) tbDes.getModel();
         model.setRowCount(0);
-        for(PregnantInfo pregnantinfo:system.getGODocDirectory().search(userAccount.getUsername()).getPregnant().getPregnantInfoArrayList()){
+        if(system.getGODocDirectory().search(userAccount.getUsername())==null||system.getGODocDirectory().search(userAccount.getUsername()).getPregnant()==null||system.getGODocDirectory().search(userAccount.getUsername()).getPregnant().getPregnantInfoArrayList()==null){
+            Object[] row = new Object[2];
+            model.addRow(row);
+
+        }
+        else{
+            for(PregnantInfo pregnantinfo:system.getGODocDirectory().search(userAccount.getUsername()).getPregnant().getPregnantInfoArrayList()){
                 Object[] row = new Object[2];
                 row[0]=pregnantinfo;
                 row[1]=pregnantinfo.getPregnant().getUsername();
                 row[2]=pregnantinfo.getDescription();
                 model.addRow(row);
-                            
+
+            }
         }
+
           
     }
 
