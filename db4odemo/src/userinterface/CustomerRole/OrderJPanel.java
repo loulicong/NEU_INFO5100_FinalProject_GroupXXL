@@ -4,10 +4,10 @@
  */
 package userinterface.CustomerRole;
 
-import Business.EcoSystem;
-import Business.Hospital.Hospital;
-import Business.UserAccount.UserAccount;
-import Business.InRequest.InRequest;
+import System.EcoSystem;
+import System.Hospital.Hospital;
+import System.UserAccount.UserAccount;
+import System.InRequest.InRequest;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

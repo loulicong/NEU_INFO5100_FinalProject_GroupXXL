@@ -4,11 +4,11 @@
  */
 package userinterface.CustomerRole;
 
-import Business.EcoSystem;
+import System.EcoSystem;
 
-import Business.Hospital.Hospital;
-import Business.UserAccount.UserAccount;
-import Business.InRequest.InRequest;
+import System.Hospital.Hospital;
+import System.UserAccount.UserAccount;
+import System.InRequest.InRequest;
 
 import java.awt.CardLayout;
 import javax.swing.*;
@@ -52,7 +52,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         }
         DefaultTableModel model_1 = (DefaultTableModel) orderJTable.getModel();
         model_1.setRowCount(0);
-        for(Hospital s:business.getRestaurantDirectory().getRestaurantArrayList()){
+        for(Hospital s:business.getHospitalDirectory().getHospitalArrayList()){
             Object[] row = new Object[2];
             row[0]=s.getName();
             model_1.addRow(row);
@@ -194,7 +194,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"please select a restaurant");
             return;
         }
-        Hospital hospital =business.getRestaurantDirectory().getRestaurantArrayList().get(selectedRow);
+        Hospital hospital =business.getHospitalDirectory().getHospitalArrayList().get(selectedRow);
         OrderJPanel s= new OrderJPanel(userProcessContainer,userAccount,business, hospital);
         CardLayout crdLyt = (CardLayout) userProcessContainer.getLayout();
         userProcessContainer.add(s);
