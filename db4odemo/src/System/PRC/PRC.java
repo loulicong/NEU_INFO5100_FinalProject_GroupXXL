@@ -5,6 +5,7 @@
  */
 package System.PRC;
 
+import System.PRCContact.PRCContact;
 import System.PRC_GO.PRC_GO;
 import System.PRC_PED.PRC_PED;
 import System.BabyNurse.BabyNurse;
@@ -25,12 +26,24 @@ public class PRC {
     private PRC_GO PRC_GO;
     private PRC_PED PRC_PED;
     private InRequestList inrequestDirectory;
+    private PRCContact prcContact;
 
 
     public PRC() {
         id = count;
-
+        PRC_GO = new PRC_GO();
+        PRC_PED = new PRC_PED();
+        prcContact = new PRCContact();
+        inrequestDirectory = new InRequestList();
         count++;
+    }
+
+    public PRCContact getPrcContact() {
+        return prcContact;
+    }
+
+    public void setPrcContact(PRCContact prcContact) {
+        this.prcContact = prcContact;
     }
 
     public String getName() {

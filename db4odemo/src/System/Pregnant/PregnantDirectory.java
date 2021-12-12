@@ -26,6 +26,9 @@ public class PregnantDirectory {
         this.pregnantArrayList = pregnantArrayList;
     }
     public Pregnant searchPregnant(String username){
+        if(pregnantArrayList==null){
+            return null;
+        }
         for(Pregnant p:pregnantArrayList){
             if(p.getUsername().equals(username)){
                 return p;

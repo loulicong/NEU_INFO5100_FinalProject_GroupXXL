@@ -35,6 +35,9 @@ public class HospitalContactDirectory {
     }
 
     public HospitalContact searchContact(String name){
+        if (hospitalList==null){
+            return null;
+        }
         for(HospitalContact c:hospitalList){
             if(c.getUsername().equals(name)){
                 return c;

@@ -60,15 +60,21 @@ public class ProcessOutJPanel extends javax.swing.JPanel {
     public void populateTable(){
         DefaultTableModel model1 = (DefaultTableModel) RequestJTable.getModel();
         model1.setRowCount(0);
-        for(InRequest s:inrequestList){
-            if(s.getStatus().equals("Out")){
-                Object[] row = new Object[3];
-                row[0]=s;
-                row[1]=s.getSender().getUsername();
-                row[2]=s.getStatus();
-                model1.addRow(row);
+        if(inrequestList==null){
+            Object[] row = new Object[3];
+            model1.addRow(row);
+        }
+        else {
+            for (InRequest s : inrequestList) {
+                if (s.getStatus().equals("Out")) {
+                    Object[] row = new Object[3];
+                    row[0] = s;
+                    row[1] = s.getSender().getUsername();
+                    row[2] = s.getStatus();
+                    model1.addRow(row);
+                }
             }
-
+        }
 
         }
 
@@ -89,7 +95,6 @@ public class ProcessOutJPanel extends javax.swing.JPanel {
 //            row[1]=ped.getStatu();
 //            model3.addRow(row);
 //        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -169,8 +174,8 @@ public class ProcessOutJPanel extends javax.swing.JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ProcessOutJPanel dwjp = (ProcessOutJPanel) component;
-        dwjp.populateTable();
+        HospitalContactMain dwjp = (HospitalContactMain) component;
+        dwjp.populateRequestTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_BackbtnActionPerformed

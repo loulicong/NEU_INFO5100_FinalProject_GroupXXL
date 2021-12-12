@@ -5,6 +5,7 @@
  */
 package System.Hospital;
 
+import System.HospitalContact.HospitalContact;
 import System.Hospital_GO.Hospital_GO;
 import System.Hospital_PED.Hospital_PED;
 import System.Community.Community;
@@ -22,14 +23,24 @@ public class Hospital {
     private Hospital_GO Hospital_GO;
     private Hospital_PED Hospital_PED;
     private InRequestList inrequestDirectory;
+    private HospitalContact hospitalContact;
 
 
     public Hospital() {
         id = count;
         inrequestDirectory = new InRequestList();
+        hospitalContact = new HospitalContact();
         Hospital_GO = new Hospital_GO();
         Hospital_PED = new Hospital_PED();
         count++;
+    }
+
+    public HospitalContact getHospitalContact() {
+        return hospitalContact;
+    }
+
+    public void setHospitalContact(HospitalContact hospitalContact) {
+        this.hospitalContact = hospitalContact;
     }
 
     public String getName() {

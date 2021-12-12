@@ -96,13 +96,14 @@ public class MainJFrame extends javax.swing.JFrame {
         prcDirectory.getPRCList().add(prc);
         prcContactDirectory.getPRCtArrayList().add(prcContact);
         UserAccount userAccount_5=userAccountDirectory.createUserAccount("PRC_1","123", role_5);
+        prcContact.setPrc(prc);
         PRC_GO prc_go= new PRC_GO();
         PRC_PED prc_ped = new PRC_PED();
         GODNurse godNurse = new GODNurse();
         godNurse.setName("Lee");
         godNurse.setSex("male");
         godNurse.setPRC(prc);
-        godNurse.setUsrname("GODoctor_1");
+        godNurse.setUsrname("GONurse_1");
         godNurse.setPassword("123");
         godNurse.setStatu("Free");
         Role r_1=new GONurseRole();
@@ -121,8 +122,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
 
 
+
+
+
+
 //        Role role_2 = new PregnantRole();
-        GODocDirectory GODocDirectory = new GODocDirectory();
 //        GODocDirectory.createDeliverMan("deliverman_1");
 //        UserAccount userAccount_2=userAccountDirectory.createUserAccount("deliverman_1","123",role_2);
 
@@ -179,6 +183,7 @@ public class MainJFrame extends javax.swing.JFrame {
         communityList.getCommunityArrayList().add(community);
         city.setCommunityArrayList(communityList.getCommunityArrayList());
         UserAccount userAccount_6 = userAccountDirectory.createUserAccount("city_1","123",role_6);
+        prc.setCommunity(community);
 
         Government government=new Government();
         GovernmentDirectory governmentDirectory=new GovernmentDirectory();
@@ -217,8 +222,6 @@ public class MainJFrame extends javax.swing.JFrame {
 
         hospital.getInrequestDirectory().getRequestList().add(inRequest);
         PEDocDirectory peDocDirectory = new PEDocDirectory();
-//        system.getWorkQueue().getRequestList().add((inRequest));
-//        system.getWorkQueue().getRequestList().add(inRequest_1);
         ArrayList<UserAccount> userAccountArrayList = new ArrayList<>();
         userAccount_3.getHospitalinRequestListt().getRequestList().add(inRequest);
         Hospital_GO hospital_go = new Hospital_GO();
@@ -234,7 +237,32 @@ public class MainJFrame extends javax.swing.JFrame {
         GODocDirectory goDocDirectory =new GODocDirectory();
         goDocDirectory.getDeliveryManArrayList().add(goDoc);
         hospital_go.addGOD(goDoc);
-        userAccountDirectory.createUserAccount("GOdoctor_1","123",r);
+        userAccountDirectory.createUserAccount("GODoctor_1","123",r);
+
+        GODoc goDoc1 = new GODoc();
+        goDoc1.setName("Tom");
+        goDoc1.setSex("male");
+        goDoc1.setHospital(hospital);
+        goDoc1.setUsrname("GODoctor_2");
+        goDoc1.setPassword("123");
+        goDoc1.setStatu("Busy");
+        goDocDirectory.getDeliveryManArrayList().add(goDoc1);
+        hospital_go.addGOD(goDoc1);
+        userAccountDirectory.createUserAccount("GODoctor_2","123",r);
+
+        Pregnant pregnant1 = new Pregnant();
+        pregnant1.setName("Fiona");
+        pregnant1.setUsername("customer_3");
+        pregnantDirectory.getCustomerArrayList().add(pregnant1);
+        UserAccount userAccount_12=userAccountDirectory.createUserAccount("customer_3","123", role_3);
+        goDoc1.setPregnant(pregnant1);
+        PregnantInfo pregnantInfo1 = new PregnantInfo();
+        pregnantInfo1.setDescription("good");
+        pregnantInfo1.setCheckdate("december 10");
+        pregnantInfoDirectory.getPregnantInfoArrayList().add(pregnantInfo1);
+        pregnant.getPregnantInfoArrayList().add(pregnantInfo1);
+        pregnant1.getPregnantInfoArrayList().add(pregnantInfo1);
+
         PEDoc peDoc = peDocDirectory.createEmployee("Black","PEDoctor_1","female",hospital);
         peDoc.setPassword("123");
         hospital_ped.addPED(peDoc);
@@ -242,16 +270,17 @@ public class MainJFrame extends javax.swing.JFrame {
         userAccountDirectory.createUserAccount("PEDoctor_1","123",role_9);
         hospital.setHospital_GO(hospital_go);
         hospital.setHospital_PED(hospital_ped);
-
-
         hospital.setCommunity(community);
         Role role_4 = new SystemAdminRole();
         UserAccount userAccount_4=userAccountDirectory.createUserAccount("admin_1","123", role_4);
 
-        this.system=new CareCenterSystem(hospitalDirectory, pregnantDirectory, GODocDirectory,prcDirectory,cityList,governmentDirectory,facultyDirectory,communityList,babyDirectory,hospitalContactDirectory);
+
+        this.system=new CareCenterSystem(hospitalDirectory, pregnantDirectory, goDocDirectory,prcDirectory,cityList,governmentDirectory,facultyDirectory,communityList,babyDirectory,hospitalContactDirectory);
         system.setInRequestList(inRequestList);
         system.setPEdocDirectory(peDocDirectory);
         system.setPRCcontactDirectory(prcContactDirectory);
+        system.setGodNurseDirectory(godNurseDirectory);
+        system.setBabyNurseDirectory(babyNurseDirectory);
         system.setUserAccountDirectory(this.userAccountDirectory);
         dB4OUtil.storeSystem(system);
     }
@@ -384,6 +413,7 @@ public class MainJFrame extends javax.swing.JFrame {
             crdLyt.next(container);
             jSplitPane1.setRightComponent(container);
         }
+        loginJButton.setEnabled(false);
         logoutJButton.setEnabled(true);
 
         // Get user name

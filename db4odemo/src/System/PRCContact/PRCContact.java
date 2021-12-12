@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @author harold
  */
 public class PRCContact {
-    String name;
+    private String name;
     int id;
     private static int count = 1;
     private String username;

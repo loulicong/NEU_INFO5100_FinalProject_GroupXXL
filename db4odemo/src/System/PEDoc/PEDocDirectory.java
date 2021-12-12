@@ -45,6 +45,9 @@ public class PEDocDirectory {
     }
 
     public PEDoc search(String usrname){
+        if (PEDocList==null){
+            return null;
+        }
         for(PEDoc go:PEDocList){
             if(go.getUsrname().equals(usrname)){
                 return go;

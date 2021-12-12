@@ -33,6 +33,9 @@ public class Hospital_PED {
     }
 
     public PEDoc searchPEDoc(String name){
+        if (PEDocList==null){
+            return null;
+        }
         for(PEDoc ped:PEDocList){
             if(ped.getName().equals(name)){
                 return ped;
