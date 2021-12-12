@@ -62,8 +62,8 @@ public class MainJFrame extends javax.swing.JFrame {
         userDirectory.createCustomer("customer_1");
         UserAccount userAccount_3=userAccountDirectory.createUserAccount("customer_1","123", PEDoc_3,role_3);
 
-        InRequest inRequest_1 =new InRequest("",userAccount_3,null,"available", hospitalDirectory.getRestaurantArrayList().get(0));
-        InRequest inRequest =new InRequest("",userAccount_3,userAccount_2,"pending", hospitalDirectory.getRestaurantArrayList().get(0));
+        InRequest inRequest_1 =new InRequest("",userAccount_3,null,"available", hospitalDirectory.getRestaurantArrayList().get(0),null);
+        InRequest inRequest =new InRequest("",userAccount_3,userAccount_2,"pending", hospitalDirectory.getRestaurantArrayList().get(0),null);
 
         this.system=new EcoSystem(hospitalDirectory, userDirectory, GODocDirectory);
         inRequestList = new InRequestList();
