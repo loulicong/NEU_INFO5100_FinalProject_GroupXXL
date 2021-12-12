@@ -43,11 +43,10 @@ public class CustomerAreaJPanel extends JPanel {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
         for(InRequest s:userAccount.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[4];
+            Object[] row = new Object[3];
             row[0]=s.getMessage();
             row[1]=s.getSender();
             row[2]=s.getStatus();
-            row[3]=s.getResult();
             model.addRow(row);
         }
     }

@@ -112,7 +112,6 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
             return;
         }
         String text = resultJTextField.getText();
-        inRequest.setResult(text);
         JOptionPane.showMessageDialog(this,"result changed");
         resultJTextField.setText("");
     }//GEN-LAST:event_submitJButtonActionPerformed

@@ -86,7 +86,6 @@ public class RequestLabTestJPanel extends javax.swing.JPanel {
             return;
         }
         String text = messageJTextField.getText();
-        inRequest.setText(text);
         messageJTextField.setText("");
         JOptionPane.showMessageDialog(this,"text changed");
         
