@@ -4,9 +4,9 @@
  */
 package userinterface.RestaurantAdminRole;
 
-import Business.EcoSystem;
-import Business.UserAccount.UserAccount;
-import Business.InRequest.InRequest;
+import System.EcoSystem;
+import System.UserAccount.UserAccount;
+import System.InRequest.InRequest;
 import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
 
 import javax.swing.*;

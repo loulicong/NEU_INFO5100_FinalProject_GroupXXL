@@ -4,10 +4,10 @@
  */
 package userinterface.DeliveryManRole;
 
-import Business.EcoSystem;
+import System.EcoSystem;
 
-import Business.UserAccount.UserAccount;
-import Business.InRequest.InRequest;
+import System.UserAccount.UserAccount;
+import System.InRequest.InRequest;
 import java.awt.CardLayout;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
