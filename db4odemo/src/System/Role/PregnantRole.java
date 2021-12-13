@@ -4,10 +4,10 @@
  */
 package System.Role;
 
-import System.EcoSystem;
+import System.CareCenterSystem;
 
 import System.UserAccount.UserAccount;
-import userinterface.CustomerRole.CustomerAreaJPanel;
+import userinterface.PregnantRole.PregnantMain;
 
 import javax.swing.*;
 
@@ -17,8 +17,8 @@ import javax.swing.*;
  */
 public class PregnantRole extends Role{
     
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new CustomerAreaJPanel(userProcessContainer,account,business);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, CareCenterSystem business) {
+        return new PregnantMain(userProcessContainer,account,business);
     }
     
     
