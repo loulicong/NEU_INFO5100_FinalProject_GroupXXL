@@ -5,6 +5,12 @@
  */
 package System.PRC;
 
+import System.PRC_GO.PRC_GO;
+import System.PRC_PED.PRC_PED;
+import System.BabyNurse.BabyNurse;
+import System.Community.Community;
+import System.GODNurse.GODNurse;
+import System.InRequest.InRequestList;
 import java.util.ArrayList;
 
 /**
@@ -12,22 +18,18 @@ import java.util.ArrayList;
  * @author harold
  */
 public class PRC {
-    String name;
+    private String name;
+    private Community community;
     int id;
     private static int count = 1;
-    ArrayList<String> menu;
+    private PRC_GO PRC_GO;
+    private PRC_PED PRC_PED;
+    private InRequestList inrequestDirectory;
 
-    public ArrayList<String> getMenu() {
-        return menu;
-    }
-
-    public void setMenu(ArrayList<String> menu) {
-        this.menu = menu;
-    }
 
     public PRC() {
         id = count;
-        menu=new ArrayList<>();
+
         count++;
     }
 
@@ -46,4 +48,46 @@ public class PRC {
     public void setId(int id) {
         this.id = id;
     }
+
+    public PRC_GO getPRC_GO() {
+        return PRC_GO;
+    }
+
+    public void setPRC_GO(PRC_GO PRC_GO) {
+        this.PRC_GO = PRC_GO;
+    }
+
+    public PRC_PED getPRC_PED() {
+        return PRC_PED;
+    }
+
+    public void setPRC_PED(PRC_PED PRC_PED) {
+        this.PRC_PED = PRC_PED;
+    }
+
+
+
+    public Community getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
+
+    public InRequestList getInrequestDirectory() {
+        return inrequestDirectory;
+    }
+
+    public void setInrequestDirectory(InRequestList inrequestDirectory) {
+        this.inrequestDirectory = inrequestDirectory;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }

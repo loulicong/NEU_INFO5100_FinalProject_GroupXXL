@@ -7,6 +7,7 @@ package System.InRequest;
 import System.Hospital.Hospital;
 import System.PRC.PRC;
 import System.UserAccount.UserAccount;
+
 import java.util.Date;
 
 /**
@@ -15,25 +16,24 @@ import java.util.Date;
  */
 public class InRequest {
 
-    private String message;
     private UserAccount sender;
-    private UserAccount receiver;
+    //private UserAccount receiver;
+    private String PrePeriod;
     private String status;
-    private Date requestDate;
-    private Date resolveDate;
+    private String requestDate;
+    private String resolveDate;
     private int id;
     private Hospital hospital;
-    private static int count = 1;
     private PRC prc;
+    private static int count = 1;
 
-
-    public PRC getPrc() {
-        return prc;
+    public InRequest() {
+        this.id =count;
+        count++;
+        Date now= new Date();
     }
 
-    public void setPrc(PRC prc) {
-        this.prc = prc;
-    }
+    
 
     public Hospital getRestaurant() {
         return hospital;
@@ -43,15 +43,14 @@ public class InRequest {
         this.hospital = hospital;
     }
 
-    public InRequest(String message, UserAccount sender, UserAccount receiver, String status, Hospital hospital,PRC prc) {
-        this.message = message;
+    public InRequest(UserAccount sender, String status, Hospital hospital,PRC prc,String preperiod) {
         this.sender = sender;
-        this.receiver = receiver;
+        //this.receiver = receiver;
         this.status = status;
-        requestDate = new Date();
+        this.PrePeriod=preperiod;
         this.hospital = hospital;
-        this.id =count;
         this.prc=prc;
+        this.id =count;
         count++;
     }
 
@@ -63,14 +62,6 @@ public class InRequest {
         this.id = id;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public UserAccount getSender() {
         return sender;
     }
@@ -79,13 +70,13 @@ public class InRequest {
         this.sender = sender;
     }
 
-    public UserAccount getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(UserAccount receiver) {
-        this.receiver = receiver;
-    }
+//    public UserAccount getReceiver() {
+//        return receiver;
+//    }
+//
+//    public void setReceiver(UserAccount receiver) {
+//        this.receiver = receiver;
+//    }
 
     public String getStatus() {
         return status;
@@ -95,19 +86,49 @@ public class InRequest {
         this.status = status;
     }
 
-    public Date getRequestDate() {
+    public String getRequestDate() {
         return requestDate;
     }
 
-    public void setRequestDate(Date requestDate) {
+    public void setRequestDate(String requestDate) {
         this.requestDate = requestDate;
     }
 
-    public Date getResolveDate() {
+    public String getResolveDate() {
         return resolveDate;
     }
 
-    public void setResolveDate(Date resolveDate) {
+    public void setResolveDate(String resolveDate) {
         this.resolveDate = resolveDate;
     }
+
+    public String getPrePeriod() {
+        return PrePeriod;
+    }
+
+    public void setPrePeriod(String PrePeriod) {
+        this.PrePeriod = PrePeriod;
+    }
+
+    public Hospital getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
+    }
+
+    public PRC getPrc() {
+        return prc;
+    }
+
+    public void setPrc(PRC prc) {
+        this.prc = prc;
+    }
+    
+    @Override
+    public String toString() {
+        return String.valueOf(id);
+    }
+    
 }

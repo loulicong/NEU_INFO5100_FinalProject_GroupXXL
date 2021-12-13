@@ -7,17 +7,18 @@ package userinterface.SystemAdminWorkArea;
 import System.City.City;
 import System.Community.Community;
 import System.Hospital.Hospital;
-import System.EcoSystem;
+import System.CareCenterSystem;
 import System.PRC.PRC;
+import System.Pregnant.Pregnant;
 import System.Role.HospitalAdminRole;
 import System.Role.PRCAdminRole;
 import System.Role.Role;
-import System.User.User;
 import System.UserAccount.UserAccount;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -26,12 +27,12 @@ import java.awt.*;
 public class CRUDJPanel extends JPanel {
 
     private JPanel userProcessContainer;
-    private EcoSystem business;
+    private CareCenterSystem business;
     
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public CRUDJPanel(JPanel userProcessContainer, EcoSystem business) {
+    public CRUDJPanel(JPanel userProcessContainer, CareCenterSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
@@ -53,7 +54,7 @@ public class CRUDJPanel extends JPanel {
             row[0]=s.getName();
             model.addRow(row);
         }
-        for(PRC s:business.getPrcDirectory().getPRCArrayList()){
+        for(PRC s:business.getPRCDirectory().getPRCtArrayList()){
             if(s==null){
                 break;
             }
@@ -68,7 +69,7 @@ public class CRUDJPanel extends JPanel {
             row[0]=s.getName();
             model.addRow(row);
         }
-        for(User s:business.getUserDirectory().getCustomerArrayList()){
+        for(Pregnant s:business.getUserDirectory().getCustomerArrayList()){
             if(s==null){
                 break;
             }
@@ -257,13 +258,13 @@ public class CRUDJPanel extends JPanel {
             }
         }
             else{
-                business.getPrcDirectory().createPRC(usernameTextfield.getText());
+                PRC prc = new PRC();
+                prc.setName(usernameTextfield.getText());
+                business.getPRCDirectory().getPRCtArrayList().add(prc);
                 Role role_2=new PRCAdminRole();
                 String passWord = passwordTextfield.getText();
                 business.getUserAccountDirectory().createUserAccount(userName,passWord,role_2);
-                PRC prc=new PRC();
                 boolean isadded=false;
-                prc.setName(usernameTextfield.getText());
                 for(City s : business.getCityList().getCityArrayList()) {
                     if (s.getName().equals(cityTextfield.getText())) {
                         for (Community v : s.getCommunityArrayList()) {
@@ -291,7 +292,7 @@ public class CRUDJPanel extends JPanel {
         communityTextfield.setText("");
         populateTable();
     }
-    private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
+    private void deleteJButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         int selectedRow = workRequestJTable.getSelectedRow();
         String username = (String) model.getValueAt(selectedRow,0);
@@ -308,15 +309,15 @@ public class CRUDJPanel extends JPanel {
                 }
                 if(role.toString().indexOf("PRC")!=-1)
                 {
-                    for(PRC v:business.getPrcDirectory().getPRCArrayList()){
+                    for(PRC v:business.getPRCDirectory().getPRCList()){
                         if(v.getName().equals(username)){
-                            business.getPrcDirectory().getPRCArrayList().remove(v);
+                            business.getPRCDirectory().getPRCList().remove(v);
                         }
                     }
                 }
                 if(role.toString().indexOf("Preg")!=-1)
                 {
-                    for(User v:business.getUserDirectory().getCustomerArrayList()){
+                    for(Pregnant v:business.getUserDirectory().getCustomerArrayList()){
                         if(v.getName().equals(username)){
                             business.getUserDirectory().getCustomerArrayList().remove(v);
                         }
@@ -393,7 +394,7 @@ public class CRUDJPanel extends JPanel {
                     if(rolename.indexOf("PRC")!=-1)
                     {
                         String originName = "";
-                        for(PRC v:business.getPrcDirectory().getPRCArrayList()){
+                        for(PRC v:business.getPRCDirectory().getPRCList()){
                             if(v.getId()==(Integer)model.getValueAt(i,3)){
                                 originName=v.getName();
                                 v.setName(temp_name);
@@ -417,9 +418,17 @@ public class CRUDJPanel extends JPanel {
                     }
                     if(rolename.indexOf("Preg")!=-1)
                     {
-                        for(User v:business.getUserDirectory().getCustomerArrayList()){
+                        String originName = "";
+                        for(Pregnant v:business.getUserDirectory().getCustomerArrayList()){
                             if(v.getId()==(Integer)model.getValueAt(i,3)){
+                                originName=v.getName();
                                 v.setName(temp_name);
+                            }
+                        }
+                        for(UserAccount v:business.getUserAccountDirectory().getUserAccountList()){
+                            if(originName.equals(v.getUsername())){
+                                v.setUsername(temp_name);
+                                v.setPassword(password);
                             }
                         }
                     }
