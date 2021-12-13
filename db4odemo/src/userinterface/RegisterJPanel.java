@@ -6,12 +6,11 @@ package userinterface;
 
 import System.Role.PregnantRole;
 import System.Role.Role;
-import System.User.User;
 import System.UserAccount.UserAccount;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
-import userinterface.CustomerRole.CustomerAreaJPanel;
-import System.EcoSystem;
+import userinterface.CityCommunity.CityJPanel;
+import System.CareCenterSystem;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,11 +24,11 @@ public class RegisterJPanel extends JPanel {
 
     private JPanel userProcessContainer;
     
-    private EcoSystem system;
+    private CareCenterSystem system;
     /**
      * Creates new form RequestLabTestJPanel
      */
-    public RegisterJPanel(JPanel userProcessContainer, EcoSystem system) {
+    public RegisterJPanel(JPanel userProcessContainer, CareCenterSystem system) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -71,7 +70,7 @@ public class RegisterJPanel extends JPanel {
         add(passwordJLabel, new AbsoluteConstraints(96, 90, -1, -1));
         add(passwordJTextField, new AbsoluteConstraints(180, 87, 89, -1));
 
-        passwordAgainJLabel.setText("password");
+        passwordAgainJLabel.setText("password again");
         add(passwordAgainJLabel, new AbsoluteConstraints(96, 140, -1, -1));
         add(passwordAgainJTextField, new AbsoluteConstraints(180, 137, 89, -1));
 
@@ -124,7 +123,7 @@ public class RegisterJPanel extends JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        CustomerAreaJPanel dwjp = (CustomerAreaJPanel) component;
+        CityJPanel dwjp = (CityJPanel) component;
         dwjp.populateRequestTable();
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.previous(userProcessContainer);

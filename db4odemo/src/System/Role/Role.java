@@ -4,7 +4,7 @@
  */
 package System.Role;
 
-import System.EcoSystem;
+import System.CareCenterSystem;
 
 import System.UserAccount.UserAccount;
 
@@ -40,7 +40,7 @@ public abstract class Role {
     
     public abstract JPanel createWorkArea( JPanel userProcessContainer,
                                           UserAccount account,
-                                          EcoSystem business);
+                                          CareCenterSystem business);
     @Override
     public String toString() {
         return this.getClass().getName();

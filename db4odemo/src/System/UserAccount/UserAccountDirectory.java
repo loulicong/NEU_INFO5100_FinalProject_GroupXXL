@@ -39,12 +39,26 @@ public class UserAccountDirectory {
         userAccountList.add(userAccount);
         return userAccount;
     }
-    
+    public UserAccount searchUserAccount(String username){
+        for(UserAccount usr:userAccountList){
+            if(usr.getUsername().equals(username)){
+                return usr;
+            }
+        }
+        return null;
+    }
     public boolean checkIfUsernameIsUnique(String username){
         for (UserAccount ua : userAccountList){
             if (ua.getUsername().equals(username))
                 return false;
         }
         return true;
+    }
+    public void remove(String username){
+        for(UserAccount usr:userAccountList){
+            if(usr.getUsername().equals(username)){
+                userAccountList.remove(usr);
+            }
+        }
     }
 }
