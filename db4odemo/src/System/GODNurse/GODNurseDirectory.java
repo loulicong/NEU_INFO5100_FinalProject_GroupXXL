@@ -5,6 +5,8 @@
  */
 package System.GODNurse;
 
+import System.GODoc.GODoc;
+import System.PRC.PRC;
 import java.util.ArrayList;
 
 /**
@@ -20,10 +22,31 @@ public class GODNurseDirectory {
     public ArrayList<GODNurse> getDeliveryManArrayList() {
         return GODNurseArrayList;
     }
-    public GODNurse createDeliverMan(String name){
+    public GODNurse createDeliverMan(String name,String usrname,String sex,PRC prc){
         GODNurse GODNurse =new GODNurse();
         GODNurse.setName(name);
+        GODNurse.setSex(sex);
+        GODNurse.setPRC(prc);
+        GODNurse.setUsrname(usrname);
+        GODNurse.setStatu("Free");
         GODNurseArrayList.add(GODNurse);
         return GODNurse;
+    }
+
+    public void remove(String usrname){
+        for(GODNurse go:GODNurseArrayList){
+            if(go.getUsrname().equals(usrname)){
+                GODNurseArrayList.remove(go);
+            }
+        }
+    }
+
+    public GODNurse search(String usrname){
+        for(GODNurse go:GODNurseArrayList){
+            if(go.getUsrname().equals(usrname)){
+                return go;
+            }
+        }
+        return null;
     }
 }

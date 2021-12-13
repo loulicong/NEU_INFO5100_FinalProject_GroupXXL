@@ -5,14 +5,31 @@
  */
 package System.GODNurse;
 
+import System.PRC.PRC;
+import System.Pregnant.Pregnant;
+
 /**
  *
  * @author harold
  */
 public class GODNurse {
     private String name;
+    private String usrname;
+    private String Sex;
     private int id;
     private static int count = 1;
+    private PRC PRC;
+    private String statu;
+    private String password;
+    private Pregnant pregnant;
+
+    public Pregnant getPregnant() {
+        return pregnant;
+    }
+
+    public void setPregnant(Pregnant pregnant) {
+        this.pregnant = pregnant;
+    }
 
     public GODNurse() {
         id = count;
@@ -32,9 +49,53 @@ public class GODNurse {
         return name;
     }
 
+    public String getSex() {
+        return Sex;
+    }
+
+    public void setSex(String Sex) {
+        this.Sex = Sex;
+    }
+
+    public String getStatu() {
+        return statu;
+    }
+
+    public void setStatu(String statu) {
+        this.statu = statu;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+
+    public PRC getPRC() {
+        return PRC;
+    }
+
+    public void setPRC(PRC PRC) {
+        this.PRC = PRC;
+    }
+
+    public String getUsrname() {
+        return usrname;
+    }
+
+    public void setUsrname(String usrname) {
+        this.usrname = usrname;
+    }
+
+
+
     @Override
     public String toString() {
         return name;
     }
-    
+
 }
