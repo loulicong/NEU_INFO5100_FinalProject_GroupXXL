@@ -49,6 +49,7 @@ public class CRUDJPanel extends JPanel {
                     row[2]=v.getRole().toString().substring(12);
                 }
             }
+            row[3] = s.getId();
             row[0]=s.getName();
             model.addRow(row);
         }
@@ -63,6 +64,7 @@ public class CRUDJPanel extends JPanel {
                     row[2]=v.getRole().toString().substring(12);
                 }
             }
+            row[3] = s.getId();
             row[0]=s.getName();
             model.addRow(row);
         }
@@ -78,7 +80,7 @@ public class CRUDJPanel extends JPanel {
                 }
             }
             row[0]=s.getName();
-
+            row[3] = s.getId();
             model.addRow(row);
         }
 
@@ -115,18 +117,18 @@ public class CRUDJPanel extends JPanel {
 
         workRequestJTable.setModel(new DefaultTableModel(
             new Object [][] {
-                {null, null,null},
-                { null, null,null},
+                {null, null,null,null},
+                { null, null,null,null},
             },
             new String [] {
-                "username","password","role"
+                "username","password","role","id"
             }
         ) {
             Class[] types = new Class [] {
                 Object.class, String.class, String.class, String.class
             };
             boolean[] canEdit = new boolean [] {
-                 true, true, false
+                 true, true, false,false
             };
 
 
@@ -163,6 +165,7 @@ public class CRUDJPanel extends JPanel {
             workRequestJTable.getColumnModel().getColumn(0).setResizable(false);
             workRequestJTable.getColumnModel().getColumn(1).setResizable(false);
             workRequestJTable.getColumnModel().getColumn(2).setResizable(false);
+            workRequestJTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 58, 375, 96));
@@ -221,6 +224,7 @@ public class CRUDJPanel extends JPanel {
             usernameTextfield.setText("");
             return;
         }
+        String communtiy = communityTextfield.getText();
         String combox = (String) roleComboBox.getSelectedItem();
         if (combox.equals("hospital")) {
             {
@@ -229,13 +233,24 @@ public class CRUDJPanel extends JPanel {
                 String passWord = passwordTextfield.getText();
                 Hospital hospital = new Hospital();
                 hospital.setName(usernameTextfield.getText());
+                boolean isadded=false;
                 for (City s : business.getCityList().getCityArrayList()) {
                     if (s.getName().equals(cityTextfield.getText())) {
                         for (Community v : s.getCommunityArrayList()) {
-                            if (v.getName().equals(communityTextfield.getText())) ;
-                            v.getHospitalArrayList().add(hospital);
+                            if (v.getName().equals(communityTextfield.getText())){
+                                v.getHospitalArrayList().add(hospital);
+                            isadded = true;
+                        }
                         }
                     }
+                }
+                if(!isadded){
+                    JOptionPane.showMessageDialog(this,"wrong input of city or community");
+                    usernameTextfield.setText("");
+                    passwordTextfield.setText("");
+                    cityTextfield.setText("");
+                    communityTextfield.setText("");
+                    return;
                 }
                 business.getUserAccountDirectory().createUserAccount(userName, passWord, role_2);
 
@@ -247,15 +262,27 @@ public class CRUDJPanel extends JPanel {
                 String passWord = passwordTextfield.getText();
                 business.getUserAccountDirectory().createUserAccount(userName,passWord,role_2);
                 PRC prc=new PRC();
+                boolean isadded=false;
                 prc.setName(usernameTextfield.getText());
-                for(City s : business.getCityList().getCityArrayList()){
-                    if (s.getName().equals(cityTextfield.getText())){
-                        for(Community v:s.getCommunityArrayList()){
-                            if(v.getName().equals(communityTextfield.getText()));
-                            v.getPrcArrayList().add(prc);
+                for(City s : business.getCityList().getCityArrayList()) {
+                    if (s.getName().equals(cityTextfield.getText())) {
+                        for (Community v : s.getCommunityArrayList()) {
+                            if (v.getName().equals(communityTextfield.getText())) {
+                                v.getPrcArrayList().add(prc);
+                                isadded = true;
+                            }
                         }
                     }
                 }
+                if(!isadded) {
+                    JOptionPane.showMessageDialog(this, "wrong input of city or community");
+                    usernameTextfield.setText("");
+                    passwordTextfield.setText("");
+                    cityTextfield.setText("");
+                    communityTextfield.setText("");
+                    return;
+                }
+
 
         }
         usernameTextfield.setText("");
@@ -265,21 +292,43 @@ public class CRUDJPanel extends JPanel {
         populateTable();
     }
     private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
-
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         int selectedRow = workRequestJTable.getSelectedRow();
-        
+        String username = (String) model.getValueAt(selectedRow,0);
+        for(UserAccount s:business.getUserAccountDirectory().getUserAccountList()){
+            if(s.getUsername().equals(username)){
+                Role role = s.getRole();
+                if(role.toString().indexOf("Hospital")!=-1)
+                {
+                    for(Hospital v:business.getHospitalDirectory().getHospitalArrayList()){
+                        if(v.getName().equals(username)){
+                            business.getHospitalDirectory().getHospitalArrayList().remove(v);
+                        }
+                    }
+                }
+                if(role.toString().indexOf("PRC")!=-1)
+                {
+                    for(PRC v:business.getPrcDirectory().getPRCArrayList()){
+                        if(v.getName().equals(username)){
+                            business.getPrcDirectory().getPRCArrayList().remove(v);
+                        }
+                    }
+                }
+                if(role.toString().indexOf("Preg")!=-1)
+                {
+                    for(User v:business.getUserDirectory().getCustomerArrayList()){
+                        if(v.getName().equals(username)){
+                            business.getUserDirectory().getCustomerArrayList().remove(v);
+                        }
+                    }
+                }
+                business.getUserAccountDirectory().getUserAccountList().remove(s);
+            }
+        }
         if (selectedRow < 0){
             JOptionPane.showMessageDialog(this,"please select a request");
             return;
         }
-        Hospital s = business.getHospitalDirectory().getHospitalArrayList().get(selectedRow);
-        for(int i = 0;i<business.getUserAccountDirectory().getUserAccountList().size();i++){
-            UserAccount v=business.getUserAccountDirectory().getUserAccountList().get(i);
-            if(s.getName().equals(v.getUsername())){
-                business.getUserAccountDirectory().getUserAccountList().remove(i);
-            }
-        }
-        business.getHospitalDirectory().getHospitalArrayList().remove(selectedRow);
         JOptionPane.showMessageDialog(this,"deleted success");
         populateTable();
         
@@ -299,41 +348,85 @@ public class CRUDJPanel extends JPanel {
     private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         for(int i = 0; i<model.getRowCount(); i++) {
-            for (int j = 0; j < model.getColumnCount(); j++) {
-                if (j == 1) {
                     String temp_name;
-                    Object temp = model.getValueAt(i, j);
+                    Object temp = model.getValueAt(i, 0);
                     if (temp instanceof Number) {
                         temp_name = Integer.toString((Integer) temp);
                     } else {
-                        temp_name = (String) model.getValueAt(i, j);
+                        temp_name = (String) model.getValueAt(i, 0);
                     }
-                    Hospital s = business.getHospitalDirectory().getHospitalArrayList().get(i);
-                    for (UserAccount v : business.getUserAccountDirectory().getUserAccountList()) {
-                        if (s.getName().equals(v.getUsername())) {
-                            v.setUsername(temp_name);
-                        }
-                    }
-                    business.getHospitalDirectory().getHospitalArrayList().get(i).setName(temp_name);
-
-                }
-                if (j == 2) {
-                    Object temp = model.getValueAt(i, j);
+                    Role role;
+                    String rolename = (String)model.getValueAt(i,2);
+                    Object temp_1 = model.getValueAt(i, 1);
                     String password;
                     if (temp instanceof Number) {
                         int password_1 = (Integer) (temp);
                         password = Integer.toString(password_1);
                     } else {
-                        password = (String) model.getValueAt(i, j);
+                        password = (String) model.getValueAt(i, 1);
                     }
-                    Hospital s = business.getHospitalDirectory().getHospitalArrayList().get(i);
-                    for (UserAccount v : business.getUserAccountDirectory().getUserAccountList()) {
-                        if (s.getName().equals(v.getUsername())) {
-                            business.getUserAccountDirectory().getUserAccountList().get(i).setPassword(password);
+                    if(rolename.indexOf("Hospital")!=-1)
+                    {
+                        String originName = "";
+                        for(Hospital v:business.getHospitalDirectory().getHospitalArrayList()){
+                            if(v.getId()==(Integer)model.getValueAt(i,3)){
+                                originName=v.getName();
+                                v.setName(temp_name);
+                            }
+                        }
+                        for(UserAccount v:business.getUserAccountDirectory().getUserAccountList()){
+                            if(originName.equals(v.getUsername())){
+                                v.setUsername(temp_name);
+                                v.setPassword(password);
+                            }
+                        }
+                        for(City v:business.getCityList().getCityArrayList()){
+                            for(Community s:v.getCommunityArrayList()){
+                                for(Hospital z:s.getHospitalArrayList()){
+                                    if(originName.equals(z.getName())){
+                                        z.setName(temp_name);
+                                    }
+                                }
+                            }
                         }
                     }
-                }
-            }
+                    if(rolename.indexOf("PRC")!=-1)
+                    {
+                        String originName = "";
+                        for(PRC v:business.getPrcDirectory().getPRCArrayList()){
+                            if(v.getId()==(Integer)model.getValueAt(i,3)){
+                                originName=v.getName();
+                                v.setName(temp_name);
+                            }
+                        }
+                        for(UserAccount v:business.getUserAccountDirectory().getUserAccountList()){
+                            if(originName.equals(v.getUsername())){
+                                v.setUsername(temp_name);
+                                v.setPassword(password);
+                            }
+                        }
+                        for(City v:business.getCityList().getCityArrayList()){
+                            for(Community s:v.getCommunityArrayList()){
+                                for(PRC z:s.getPrcArrayList()){
+                                    if(originName.equals(z.getName())){
+                                        z.setName(temp_name);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if(rolename.indexOf("Preg")!=-1)
+                    {
+                        for(User v:business.getUserDirectory().getCustomerArrayList()){
+                            if(v.getId()==(Integer)model.getValueAt(i,3)){
+                                v.setName(temp_name);
+                            }
+                        }
+                    }
+
+
+
+
         }
         JOptionPane.showMessageDialog(this,"changing success");
         populateTable();
