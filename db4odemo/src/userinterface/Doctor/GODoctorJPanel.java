@@ -6,6 +6,7 @@
 package userinterface.Doctor;
 
 import System.CareCenterSystem;
+import System.GODoc.GODoc;
 import System.PregnantInfo.PregnantInfo;
 import System.UserAccount.UserAccount;
 
@@ -24,13 +25,13 @@ public class GODoctorJPanel extends JPanel {
     /**
      * Creates new form DoctorJPanel
      */
-    
+
     JFileChooser fc;
     private JPanel userProcessContainer;
     private CareCenterSystem system;
     private UserAccount userAccount;
     //MimetypesFileTypeMap mtftp;
-    
+
 
 
     public GODoctorJPanel(JPanel userProcessContainer,  UserAccount account,CareCenterSystem system) {
@@ -64,6 +65,7 @@ public class GODoctorJPanel extends JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         lbDescri.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbDescri.setText("Description:");
@@ -86,19 +88,19 @@ public class GODoctorJPanel extends JPanel {
 
         lbImage.setText("Submit Image Area");
 
-        tbDes.setModel(new DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Check Date", "Pregnant Name", "Description"
-            }
+        tbDes.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+                        {null, null, null},
+                        {null, null, null},
+                        {null, null, null},
+                        {null, null, null}
+                },
+                new String [] {
+                        "Check Date", "Pregnant Name", "Description"
+                }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                    false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -140,106 +142,119 @@ public class GODoctorJPanel extends JPanel {
             }
         });
 
+        jButton2.setText(">> Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnSubmit)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbDescri1)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbBUltraImage)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnupload, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(lbDescri)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(18, 18, 18)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(32, Short.MAX_VALUE)
-                        .addComponent(lbImage, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                    .addComponent(lbImage1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(73, 73, 73))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(jButton2))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(18, 18, 18)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(btnSubmit)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(lbDescri1)
+                                                                                .addGap(18, 18, 18)
+                                                                                .addComponent(txtImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(lbBUltraImage)
+                                                                                .addGap(18, 18, 18)
+                                                                                .addComponent(btnupload, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                                                .addComponent(lbDescri)
+                                                                                                .addGap(18, 18, 18))
+                                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                                .addComponent(jLabel1)
+                                                                                                .addGap(18, 18, 18)))
+                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                                        .addComponent(jTextField2)
+                                                                                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                .addContainerGap(32, Short.MAX_VALUE)
+                                                                .addComponent(lbImage, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)))
+                                                .addGap(15, 15, 15)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                                                        .addComponent(lbImage1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 103, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbDescri))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(136, 136, 136)
-                                .addComponent(btnSubmit))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnupload)
-                                    .addComponent(lbBUltraImage))
-                                .addGap(26, 26, 26)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbDescri1))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbImage, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addGap(10, 10, 10)
-                        .addComponent(lbImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(lbDescri))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(136, 136, 136)
+                                                                .addComponent(btnSubmit))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(24, 24, 24)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                        .addComponent(btnupload)
+                                                                        .addComponent(lbBUltraImage))
+                                                                .addGap(26, 26, 26)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(txtImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(lbDescri1))))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lbImage, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jButton1)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(lbImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(15, 15, 15))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnuploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuploadActionPerformed
 
         int width=285, height=169;
-        
+
         if(fc==null){
             fc=new JFileChooser();
         }
         fc.setCurrentDirectory(new java.io.File("/Users/zhuzixuan/NEU/INFO5100/images"));
         fc.setDialogTitle("Please choose an image");
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        
+
         if(fc.showOpenDialog(btnupload)==JFileChooser.APPROVE_OPTION){
             txtImagePath.setText(fc.getSelectedFile().getAbsolutePath());
             ImageIcon img=new ImageIcon(txtImagePath.getText());
             img.setImage(img.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
             lbImage.setIcon(img);
-           
+
         }
 
-            
-        
+
+
     }//GEN-LAST:event_btnuploadActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -271,10 +286,10 @@ public class GODoctorJPanel extends JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if(tbDes.getSelectedRow()<0){
-                JOptionPane.showMessageDialog(this,"Please select a row");
-                return;
+            JOptionPane.showMessageDialog(this,"Please select a row");
+            return;
         }
-        
+
         String date=(String)tbDes.getValueAt(tbDes.getSelectedRow(), 0);
         int width=285, height=169;
         //system.getPregnantDirectory().searchPregnant(name).getPregnantInfoArrayList()
@@ -284,37 +299,50 @@ public class GODoctorJPanel extends JPanel {
                 img_.setImage(img_.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
                 lbImage1.setIcon(img_);
             }
-            
-        }
-        
 
-        
-        
+        }
+
+
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void populateTable() {
-        
+
         DefaultTableModel model = (DefaultTableModel) tbDes.getModel();
         model.setRowCount(0);
-        for(PregnantInfo pregnantinfo:system.getGODocDirectory().search(userAccount.getUsername()).getPregnant().getPregnantInfoArrayList()){
+        if(system.getGODocDirectory().search(userAccount.getUsername())==null||system.getGODocDirectory().search(userAccount.getUsername()).getPregnant()==null||system.getGODocDirectory().search(userAccount.getUsername()).getPregnant().getPregnantInfoArrayList()==null){
+            Object[] row = new Object[2];
+            model.addRow(row);
+        }
+        else{
+            GODoc goDoc = system.getGODocDirectory().search(userAccount.getUsername());
+            for(PregnantInfo pregnantinfo:goDoc.getPregnant().getPregnantInfoArrayList()){
                 Object[] row = new Object[2];
                 row[0]=pregnantinfo;
                 row[1]=pregnantinfo.getPregnant().getUsername();
                 row[2]=pregnantinfo.getDescription();
                 model.addRow(row);
-                            
+
+            }
+
         }
-          
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
     private javax.swing.JButton btnupload;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;

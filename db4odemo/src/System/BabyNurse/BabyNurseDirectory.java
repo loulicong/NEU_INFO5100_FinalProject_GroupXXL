@@ -43,6 +43,9 @@ public class BabyNurseDirectory {
     }
 
     public BabyNurse search(String usrname){
+        if(BabyNurseArrayList==null){
+            return null;
+        }
         for(BabyNurse go:BabyNurseArrayList){
             if(go.getUsrname().equals(usrname)){
                 return go;

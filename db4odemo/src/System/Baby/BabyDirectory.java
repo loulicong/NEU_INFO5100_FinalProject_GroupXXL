@@ -32,6 +32,9 @@ public class BabyDirectory {
     }
 
     public Baby search(String name){
+        if(babyArrayList==null){
+            return null;
+        }
         for(Baby baby:babyArrayList){
             if (baby.getName().equals(name)){
                 return baby;

@@ -10,6 +10,7 @@ import System.UserAccount.UserAccount;
 
 import javax.swing.*;
 
+import userinterface.Doctor.GONurseJPanel;
 import userinterface.HospitalContact.ProcessRequestJPanel;
 
 /**
@@ -20,7 +21,7 @@ public class GONurseRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, CareCenterSystem business) {
-        return new ProcessRequestJPanel(userProcessContainer,account,business);//To change body of generated methods, choose Tools | Templates.
+        return new GONurseJPanel(userProcessContainer,account,business);//To change body of generated methods, choose Tools | Templates.
     }
 
 }

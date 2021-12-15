@@ -82,7 +82,7 @@ public class addPRCDocJPanel extends JPanel {
         jLabel4.setText("Password:");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
 
-        jLabel5.setText("Hospital:");
+        jLabel5.setText("PRC:");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, -1, -1));
         add(txthospital, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 180, 30));
         add(txtname, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 180, 30));
@@ -133,6 +133,7 @@ public class addPRCDocJPanel extends JPanel {
         }
         PRC prc=system.getPRCDirectory().searchPRC(txthospital.getText());
         GODNurse go=system.getGodNurseDirectory().createDeliverMan(txtname.getText(), txtusername.getText(), txtsex.getText(), prc);
+        go.setPassword(txtpsd.getText());
         Role r=new GONurseRole();
         system.getUserAccountDirectory().createUserAccount(txtusername.getText(), txtpsd.getText(),r);
         prc.getPRC_GO().addGOD(go);
@@ -141,6 +142,7 @@ public class addPRCDocJPanel extends JPanel {
         txtsex.setText("");
         txtpsd.setText("");
         txthospital.setText("");
+        txtusername.setText("");
     }//GEN-LAST:event_SubmitbtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -36,6 +36,9 @@ public class HospitalDirectory {
     }
 
     public Hospital searchHospital(String name){
+        if (hospitalList==null){
+            return null;
+        }
         for(Hospital h:hospitalList){
             if(h.getName().equals(name)){
                 return h;

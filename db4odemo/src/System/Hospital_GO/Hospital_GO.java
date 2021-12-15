@@ -33,6 +33,9 @@ public class Hospital_GO {
     }
 
     public GODoc searchGODoc(String name){
+        if (GODocList==null){
+            return null;
+        }
         for(GODoc go:GODocList){
             if(go.getName().equals(name)){
                 return go;
