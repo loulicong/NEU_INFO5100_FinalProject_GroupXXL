@@ -4,9 +4,10 @@
  */
 package System.Role;
 
-import System.EcoSystem;
+import System.CareCenterSystem;
 import System.UserAccount.UserAccount;
-import userinterface.RestaurantAdminRole.AdminWorkAreaJPanel;
+import userinterface.Doctor.PEDoctorJPanel;
+import userinterface.HospitalContact.ProcessRequestJPanel;
 
 import javax.swing.*;
 
@@ -17,10 +18,10 @@ import javax.swing.*;
 public class PedDocRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new AdminWorkAreaJPanel(userProcessContainer,account,business);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, CareCenterSystem business) {
+        return new PEDoctorJPanel(userProcessContainer,account,business);
     }
 
-    
-    
+
+
 }
