@@ -59,26 +59,38 @@ public class ManageDoctorJPanel extends JPanel {
 
         DefaultTableModel model2 = (DefaultTableModel) GOJTable.getModel();
         model2.setRowCount(0);
-        for(GODoc go:GOdocList.getGODocList()){
+        if (GOdocList==null){
             Object[] row = new Object[5];
-            row[0]=go;
-            row[1]=go.getSex();
-            row[2]=go.getUsrname();
-            row[3]=go.getPassword();
-            row[4]=go.getStatu();
             model2.addRow(row);
+        }
+        else {
+            for (GODoc go : GOdocList.getGODocList()) {
+                Object[] row = new Object[5];
+                row[0] = go;
+                row[1] = go.getSex();
+                row[2] = go.getUsrname();
+                row[3] = go.getPassword();
+                row[4] = go.getStatu();
+                model2.addRow(row);
+            }
         }
         
         DefaultTableModel model3 = (DefaultTableModel) PEDJTable.getModel();
         model3.setRowCount(0);
-        for(PEDoc ped:PEDdocList.getPEDocList()){
+        if (PEDdocList==null){
             Object[] row = new Object[5];
-            row[0]=ped;
-            row[1]=ped.getSex();
-            row[2]=ped.getUsrname();
-            row[3]=ped.getPassword();
-            row[4]=ped.getStatu();
-            model2.addRow(row);
+            model3.addRow(row);
+        }
+        else {
+            for (PEDoc ped : PEDdocList.getPEDocList()) {
+                Object[] row = new Object[5];
+                row[0] = ped;
+                row[1] = ped.getSex();
+                row[2] = ped.getUsrname();
+                row[3] = ped.getPassword();
+                row[4] = ped.getStatu();
+                model3.addRow(row);
+            }
         }
     }
 
@@ -278,8 +290,8 @@ public class ManageDoctorJPanel extends JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManageDoctorJPanel dwjp = (ManageDoctorJPanel) component;
-        dwjp.populateTable();
+        HospitalContactMain dwjp = (HospitalContactMain) component;
+        dwjp.populateRequestTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_BackbtnActionPerformed

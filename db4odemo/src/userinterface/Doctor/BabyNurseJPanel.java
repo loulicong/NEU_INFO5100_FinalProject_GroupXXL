@@ -180,19 +180,30 @@ public class BabyNurseJPanel extends JPanel {
 
         DefaultTableModel model = (DefaultTableModel) tbDes.getModel();
         model.setRowCount(0);
-        for(Baby baby:system.getBabyNurseDirectory().search(userAccount.getUsername()).getPregnant().getBabyArrayList()){
-            {
-                for(BabyInfo babyInfo:baby.getBabyinfoDirectory().getBabyInfoArrayList()){
-                    Object[] row = new Object[2];
-                    row[0]=babyInfo;
-                    row[1]=babyInfo.getBaby().getName();
-                    row[2]=babyInfo.getDescription();
-                    model.addRow(row);
+        if (system.getBabyNurseDirectory().search(userAccount.getUsername()) == null || system.getBabyNurseDirectory().search(userAccount.getUsername()).getPregnant() == null || system.getBabyNurseDirectory().search(userAccount.getUsername()).getPregnant().getBabyArrayList() == null) {
+            Object[] row = new Object[2];
+            model.addRow(row);
+        } else {
+            for (Baby baby : system.getBabyNurseDirectory().search(userAccount.getUsername()).getPregnant().getBabyArrayList()) {
+                {
+                    for (BabyInfo babyInfo : baby.getBabyinfoDirectory().getBabyInfoArrayList()) {
+                        if (babyInfo==null){
+                            Object[] row = new Object[2];
+                            model.addRow(row);
+                            return;
+                        }
+                        Object[] row = new Object[2];
+                        row[0] = babyInfo;
+                        row[1] = babyInfo.getBaby().getName();
+                        row[2] = babyInfo.getDescription();
+                        model.addRow(row);
+                    }
                 }
             }
         }
-
     }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton btnSubmit;

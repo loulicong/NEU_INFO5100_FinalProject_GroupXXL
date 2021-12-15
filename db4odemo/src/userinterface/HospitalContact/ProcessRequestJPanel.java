@@ -54,51 +54,71 @@ public class ProcessRequestJPanel extends JPanel {
         this.inrequestList=hospital.getInrequestDirectory();
 
         populateTable();
+        this.hospital=system.getHospitalDirectory().searchHospital(hospitalcontact.getHospital().getName());
     }
     
     public void populateTable(){
         pregnantArrayList = new ArrayList<>();
         DefaultTableModel model1 = (DefaultTableModel) RequestJTable.getModel();
         model1.setRowCount(0);
-        for(InRequest s:inrequestList.getRequestList()){
-            if(s.getStatus().equals("Requesting")) {
-                Object[] row = new Object[3];
-                row[0] = s;
-                row[1] = s.getPrePeriod();
-                row[2] = s.getStatus();
-                model1.addRow(row);
-                pregnantArrayList.add(system.getPregnantDirectory().searchPregnant(s.getSender().getUsername()));
-                continue;
-            }
+        if(inrequestList==null){
+            Object[] row = new Object[3];
+            model1.addRow(row);
         }
-        for(InRequest s:inrequestList.getRequestList()){
-            if(!s.getStatus().equals("Requesting")) {
-                Object[] row = new Object[3];
-                row[0] = s;
-                row[1] = s.getPrePeriod();
-                row[2] = s.getStatus();
-                model1.addRow(row);
-                pregnantArrayList.add(system.getPregnantDirectory().searchPregnant(s.getSender().getUsername()));
+       else {
+            for (InRequest s : inrequestList.getRequestList()) {
+                if (s.getStatus().equals("Requesting")) {
+                    Object[] row = new Object[3];
+                    row[0] = s;
+                    row[1] = s.getPrePeriod();
+                    row[2] = s.getStatus();
+                    model1.addRow(row);
+                    pregnantArrayList.add(system.getPregnantDirectory().searchPregnant(s.getSender().getUsername()));
+                    continue;
+                }
             }
 
+            for (InRequest s : inrequestList.getRequestList()) {
+                if (!s.getStatus().equals("Requesting")) {
+                    Object[] row = new Object[3];
+                    row[0] = s;
+                    row[1] = s.getPrePeriod();
+                    row[2] = s.getStatus();
+                    model1.addRow(row);
+                    pregnantArrayList.add(system.getPregnantDirectory().searchPregnant(s.getSender().getUsername()));
+                }
+
+            }
         }
 
         DefaultTableModel model2 = (DefaultTableModel) GOJTable.getModel();
         model2.setRowCount(0);
-        for(GODoc go:GOdocList.getGODocList()){
+        if(GOdocList==null){
             Object[] row = new Object[2];
-            row[0]=go;
-            row[1]=go.getStatu();
             model2.addRow(row);
+        }
+        else {
+            for (GODoc go : GOdocList.getGODocList()) {
+                Object[] row = new Object[2];
+                row[0] = go;
+                row[1] = go.getStatu();
+                model2.addRow(row);
+            }
         }
         
         DefaultTableModel model3 = (DefaultTableModel) PEDJTable.getModel();
         model3.setRowCount(0);
-        for(PEDoc ped:PEDdocList.getPEDocList()){
-            Object[] row = new Object[2];
-            row[0]=ped;
-            row[1]=ped.getStatu();
-            model3.addRow(row);
+        if(PEDdocList==null){
+            Object[] row = new Object[3];
+            model1.addRow(row);
+        }
+        else {
+            for (PEDoc ped : PEDdocList.getPEDocList()) {
+                Object[] row = new Object[2];
+                row[0] = ped;
+                row[1] = ped.getStatu();
+                model3.addRow(row);
+            }
         }
     }
 
@@ -370,8 +390,8 @@ public class ProcessRequestJPanel extends JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ProcessRequestJPanel dwjp = (ProcessRequestJPanel) component;
-        dwjp.populateTable();
+        HospitalContactMain dwjp = (HospitalContactMain) component;
+        dwjp.populateRequestTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_BackbtnActionPerformed

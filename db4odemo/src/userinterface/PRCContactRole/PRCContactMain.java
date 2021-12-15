@@ -27,9 +27,9 @@ public class PRCContactMain extends JPanel {
     public PRCContactMain(JPanel userProcessContainer, UserAccount userAccount,CareCenterSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.prccontact = prccontact;
+        this.userAccount = userAccount;
         this.system= system;
-        valueLabel.setText(prccontact.getUsername());
+        valueLabel.setText(userAccount.getUsername());
 //        for(InRequest inRequest :system.getRequestInList().getWorkRequestList()){
 //            if(inRequest.getSender().getPassword().equals(userAccount.getPassword())&& inRequest.getSender().getUsername().equals(userAccount.getUsername())){
 //                userAccount.getRequestInList().getWorkRequestList().add(inRequest);

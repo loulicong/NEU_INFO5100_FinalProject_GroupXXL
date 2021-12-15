@@ -53,6 +53,9 @@ public class InRequestList {
     }
 
     public InRequest searchRequest(Hospital hospital){
+        if (inRequestList==null){
+            return null;
+        }
         for(InRequest r:inRequestList){
             if(r.getHospital().getName().equals(hospital.getName())){
                 return r;
@@ -62,6 +65,9 @@ public class InRequestList {
     }
 
     public InRequest searchPRCRequest(PRC prc){
+        if (prc==null){
+            return null;
+        }
         for(InRequest r:inRequestList){
             if(r.getPrc().getName().equals(prc.getName())){
                 return r;
@@ -71,6 +77,9 @@ public class InRequestList {
     }
 
     public InRequest searchRequestasPregnant(String username){
+        if (inRequestList==null){
+            return null;
+        }
         for(InRequest r:inRequestList){
             if(r.getSender().getUsername().equals(username)){
                 return r;
@@ -79,6 +88,9 @@ public class InRequestList {
         return null;
     }
     public InRequest searchById(int id){
+        if (inRequestList==null){
+            return null;
+        }
         for(InRequest r:inRequestList){
             if(r.getId()==id){
                 return r;

@@ -74,7 +74,7 @@ public class RegisterJPanel extends JPanel {
         add(passwordAgainJLabel, new AbsoluteConstraints(96, 140, -1, -1));
         add(passwordAgainJTextField, new AbsoluteConstraints(180, 137, 89, -1));
 
-        nameJLabel.setText("username");
+        nameJLabel.setText("name");
         add(nameJLabel, new AbsoluteConstraints(96, 190, -1, -1));
         add(nameJTextField, new AbsoluteConstraints(180, 187, 89, -1));
 

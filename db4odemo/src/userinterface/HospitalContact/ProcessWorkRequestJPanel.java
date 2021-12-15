@@ -99,8 +99,8 @@ public class ProcessWorkRequestJPanel extends JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ProcessRequestJPanel dwjp = (ProcessRequestJPanel) component;
-        dwjp.populateTable();
+        HospitalContactMain dwjp = (HospitalContactMain) component;
+        dwjp.populateRequestTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed

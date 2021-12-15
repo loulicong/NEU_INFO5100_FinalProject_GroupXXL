@@ -6,6 +6,8 @@ package userinterface.PregnantRole;
 
 import System.CareCenterSystem;
 
+import System.GODNurse.GODNurse;
+import System.GODoc.GODoc;
 import System.Hospital.Hospital;
 import System.UserAccount.UserAccount;
 import System.InRequest.InRequest;
@@ -206,7 +208,7 @@ public class PregnantMain extends javax.swing.JPanel {
         boolean ischanged=false;
         for(InRequest r:system.getInRequestList().getRequestList()){
             if(r.getSender().getUsername().equals(userAccount.getUsername())&&r.getHospital()!=null){
-                if(r.getStatus().equals("In hospital")){
+                if(r.getStatus().equals("In hospital")||r.getStatus().equals("Accepted")){
                     r.setStatus("Out");
                     JOptionPane.showMessageDialog(this,"Out Succesfully!");
                     ischanged = true;
@@ -217,6 +219,18 @@ public class PregnantMain extends javax.swing.JPanel {
                 return;
             }
 
+        }
+        for(GODoc goDoc:system.getGODocDirectory().getDeliveryManArrayList()){
+            if(userAccount.getUsername().equals(goDoc.getPregnant().getUsername())){
+                goDoc.setPregnant(null);
+                goDoc.setStatu("Free");
+            }
+        }
+        for(GODNurse godNurse:system.getGodNurseDirectory().getDeliveryManArrayList()){
+            if(userAccount.getUsername().equals(godNurse.getPregnant().getUsername())){
+                godNurse.setPregnant(null);
+                godNurse.setStatu("Free");
+            }
         }
 //        Pregnant pregnant=system.getPregnantDirectory().searchPregnant(userAccount.getUsername());
 //        pregnant.setHospitalstatu("Out");

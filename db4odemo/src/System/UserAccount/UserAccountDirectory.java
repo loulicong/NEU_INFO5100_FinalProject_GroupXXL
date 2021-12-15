@@ -40,6 +40,9 @@ public class UserAccountDirectory {
         return userAccount;
     }
     public UserAccount searchUserAccount(String username){
+        if (userAccountList==null){
+            return null;
+        }
         for(UserAccount usr:userAccountList){
             if(usr.getUsername().equals(username)){
                 return usr;

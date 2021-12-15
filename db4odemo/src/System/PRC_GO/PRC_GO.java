@@ -34,6 +34,9 @@ public class PRC_GO {
     }
 
     public GODNurse searchGODoc(String name){
+        if (GODNurseList==null){
+            return null;
+        }
         for(GODNurse go:GODNurseList){
             if(go.getName().equals(name)){
                 return go;

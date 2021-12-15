@@ -42,6 +42,9 @@ public class GODNurseDirectory {
     }
 
     public GODNurse search(String usrname){
+        if(GODNurseArrayList==null){
+            return null;
+        }
         for(GODNurse go:GODNurseArrayList){
             if(go.getUsrname().equals(usrname)){
                 return go;
