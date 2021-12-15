@@ -5,29 +5,30 @@
  */
 package System.Hospital;
 
-import java.util.ArrayList;
+import System.Hospital_GO.Hospital_GO;
+import System.Hospital_PED.Hospital_PED;
+import System.Community.Community;
+import System.InRequest.InRequestList;
 
 /**
  *
  * @author harold
  */
 public class Hospital {
-    String name;
-    int id;
+    private String name;
+    private int id;
     private static int count = 1;
-    ArrayList<String> menu;
+    private Community community;
+    private Hospital_GO Hospital_GO;
+    private Hospital_PED Hospital_PED;
+    private InRequestList inrequestDirectory;
 
-    public ArrayList<String> getMenu() {
-        return menu;
-    }
-
-    public void setMenu(ArrayList<String> menu) {
-        this.menu = menu;
-    }
 
     public Hospital() {
         id = count;
-        menu=new ArrayList<>();
+        inrequestDirectory = new InRequestList();
+        Hospital_GO = new Hospital_GO();
+        Hospital_PED = new Hospital_PED();
         count++;
     }
 
@@ -45,5 +46,45 @@ public class Hospital {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Hospital_GO getHospital_GO() {
+        return Hospital_GO;
+    }
+
+    public void setHospital_GO(Hospital_GO Hospital_GO) {
+        this.Hospital_GO = Hospital_GO;
+    }
+
+    public Hospital_PED getHospital_PED() {
+        return Hospital_PED;
+    }
+
+    public void setHospital_PED(Hospital_PED Hospital_PED) {
+        this.Hospital_PED = Hospital_PED;
+    }
+
+    public Community getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
+
+    public InRequestList getInrequestDirectory() {
+        return inrequestDirectory;
+    }
+
+    public void setInrequestDirectory(InRequestList inrequestDirectory) {
+        this.inrequestDirectory = inrequestDirectory;
+    }
+
+
+
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

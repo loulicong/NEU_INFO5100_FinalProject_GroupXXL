@@ -16,5 +16,9 @@ public class CityList {
     public CityList() {
         this.cityArrayList = new ArrayList<>();
     }
+    public void createCity(String name){
+        City city=new City(name);
+        cityArrayList.add(city);
+    }
 
 }

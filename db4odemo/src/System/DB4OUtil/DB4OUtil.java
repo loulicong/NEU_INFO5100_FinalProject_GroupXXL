@@ -1,7 +1,7 @@
 package System.DB4OUtil;
 
 import System.ConfigureASystem;
-import System.EcoSystem;
+import System.CareCenterSystem;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -43,7 +43,7 @@ public class DB4OUtil {
             config.common().updateDepth(Integer.MAX_VALUE);
 
             //Register your top most Class here
-            config.common().objectClass(EcoSystem.class).cascadeOnUpdate(true); // Change to the object you want to save
+            config.common().objectClass(CareCenterSystem.class).cascadeOnUpdate(true); // Change to the object you want to save
 
             ObjectContainer db = Db4oEmbedded.openFile(config, FILENAME);
             return db;
@@ -53,17 +53,17 @@ public class DB4OUtil {
         return null;
     }
 
-    public synchronized void storeSystem(EcoSystem system) {
+    public synchronized void storeSystem(CareCenterSystem system) {
         ObjectContainer conn = createConnection();
         conn.store(system);
         conn.commit();
         conn.close();
     }
     
-    public EcoSystem retrieveSystem(){
+    public CareCenterSystem retrieveSystem(){
         ObjectContainer conn = createConnection();
-        ObjectSet<EcoSystem> systems = conn.query(EcoSystem.class); // Change to the object you want to save
-        EcoSystem system;
+        ObjectSet<CareCenterSystem> systems = conn.query(CareCenterSystem.class); // Change to the object you want to save
+        CareCenterSystem system;
         if (systems.size() == 0){
             system = ConfigureASystem.configure();  // If there's no System in the record, create a new one
         }

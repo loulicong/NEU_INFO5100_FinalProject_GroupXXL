@@ -1,5 +1,6 @@
 package System.Community;
 
+import System.Government.Faculty;
 import System.Hospital.Hospital;
 import System.PRC.PRC;
 
@@ -10,11 +11,21 @@ public class Community
     public String name;
     public ArrayList<Hospital> hospitalArrayList;
     public ArrayList<PRC> prcArrayList;
+    Faculty faculty;
 
     public Community(String name) {
         prcArrayList=new ArrayList<>();
         hospitalArrayList = new ArrayList<>();
         this.name=name;
+
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
     }
 
     public String getName() {

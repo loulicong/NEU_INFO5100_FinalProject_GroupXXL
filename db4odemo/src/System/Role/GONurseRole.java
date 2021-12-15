@@ -1,26 +1,26 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package System.Role;
 
-import System.EcoSystem;
+import System.CareCenterSystem;
 import System.UserAccount.UserAccount;
-import userinterface.RestaurantAdminRole.AdminWorkAreaJPanel;
 
 import javax.swing.*;
 
+import userinterface.HospitalContact.ProcessRequestJPanel;
+
 /**
  *
- * @author raunak
+ * @author harold
  */
-public class GONurseRole extends Role{
+public class GONurseRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new AdminWorkAreaJPanel(userProcessContainer,account,business);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, CareCenterSystem business) {
+        return new ProcessRequestJPanel(userProcessContainer,account,business);//To change body of generated methods, choose Tools | Templates.
     }
 
-    
-    
 }

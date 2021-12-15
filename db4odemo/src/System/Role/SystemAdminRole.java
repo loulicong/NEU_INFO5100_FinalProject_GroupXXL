@@ -4,7 +4,7 @@
  */
 package System.Role;
 
-import System.EcoSystem;
+import System.CareCenterSystem;
 
 import System.UserAccount.UserAccount;
 import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
@@ -18,7 +18,7 @@ import javax.swing.*;
 public class SystemAdminRole extends Role{
 
   
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem system) {
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, CareCenterSystem system) {
         return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
     }
     
