@@ -129,6 +129,9 @@ public class RequestInPRCJPanel extends javax.swing.JPanel {
             return;
         }
         for(InRequest s:system.getInRequestList().getRequestList()){
+            if(s.getPrc()==null){
+                continue;
+            }
             if(s.getSender().getUsername().equals(userAccount.getUsername())&&
                     s.getPrc().getName().equals(system.getPRCDirectory().getPRCList().get(selectedRow).getName())){
                 if(s.getStatus().equals("Processing")||s.getStatus().equals("In PRC")||s.getStatus().equals("Requesting")){

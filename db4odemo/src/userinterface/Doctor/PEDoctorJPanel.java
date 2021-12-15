@@ -182,6 +182,10 @@ public class PEDoctorJPanel extends JPanel {
 
         DefaultTableModel model = (DefaultTableModel) tbDes.getModel();
         model.setRowCount(0);
+        if(system.getPEdocDirectory().search(userAccount.getUsername())==null||system.getPEdocDirectory().search(userAccount.getUsername()).getPregnant()==null||system.getPEdocDirectory().search(userAccount.getUsername()).getPregnant().getPregnantInfoArrayList()==null){
+            Object[] row = new Object[2];
+            model.addRow(row);
+        }
         for(Baby baby:system.getPEdocDirectory().search(userAccount.getUsername()).getPregnant().getBabyArrayList()){
             {
                 for(BabyInfo babyInfo:baby.getBabyinfoDirectory().getBabyInfoArrayList()){

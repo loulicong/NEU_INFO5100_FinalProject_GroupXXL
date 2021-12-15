@@ -61,27 +61,33 @@ public class PRCProcessRequestJPanel extends JPanel {
         pregnantArrayList = new ArrayList<>();
         DefaultTableModel model1 = (DefaultTableModel) RequestJTable.getModel();
         model1.setRowCount(0);
-        for(InRequest s:inrequestList.getRequestList()){
-            if(s.getStatus().equals("Requesting")){
-                Object[] row = new Object[3];
-                row[0]=s;
-                row[1]=s.getPrePeriod();
-                row[2]=s.getStatus();
-                model1.addRow(row);
-                pregnantArrayList.add(system.getPregnantDirectory().searchPregnant(s.getSender().getUsername()));
-            }
-
+        if (inrequestList==null){
+            Object[] row = new Object[3];
+            model1.addRow(row);
         }
-        for(InRequest s:inrequestList.getRequestList()){
-            if(!s.getStatus().equals("Requesting")){
-                Object[] row = new Object[3];
-                row[0]=s;
-                row[1]=s.getPrePeriod();
-                row[2]=s.getStatus();
-                model1.addRow(row);
-                pregnantArrayList.add(system.getPregnantDirectory().searchPregnant(s.getSender().getUsername()));
-            }
+        else {
+            for (InRequest s : inrequestList.getRequestList()) {
+                if (s.getStatus().equals("Requesting")) {
+                    Object[] row = new Object[3];
+                    row[0] = s;
+                    row[1] = s.getPrePeriod();
+                    row[2] = s.getStatus();
+                    model1.addRow(row);
+                    pregnantArrayList.add(system.getPregnantDirectory().searchPregnant(s.getSender().getUsername()));
+                }
 
+            }
+            for (InRequest s : inrequestList.getRequestList()) {
+                if (!s.getStatus().equals("Requesting")) {
+                    Object[] row = new Object[3];
+                    row[0] = s;
+                    row[1] = s.getPrePeriod();
+                    row[2] = s.getStatus();
+                    model1.addRow(row);
+                    pregnantArrayList.add(system.getPregnantDirectory().searchPregnant(s.getSender().getUsername()));
+                }
+
+            }
         }
 
 
@@ -342,6 +348,11 @@ public class PRCProcessRequestJPanel extends JPanel {
             JOptionPane.showMessageDialog(this,"please select a row");
             return;
         }
+        DefaultTableModel model1 = (DefaultTableModel) RequestJTable.getModel();
+        if((String)model1.getValueAt(selectedRow,2)==null){
+            JOptionPane.showMessageDialog(this,"no request");
+            return;
+        }
         
         Submit_btn.setEnabled(true);
         chooseGO.setEnabled(true);
@@ -369,8 +380,8 @@ public class PRCProcessRequestJPanel extends JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        PRCProcessRequestJPanel dwjp = (PRCProcessRequestJPanel) component;
-        dwjp.populateTable();
+        PRCContactMain dwjp = (PRCContactMain) component;
+        dwjp.populateRequestTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_BackbtnActionPerformed

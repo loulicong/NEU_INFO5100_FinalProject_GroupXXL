@@ -41,6 +41,9 @@ public class PRCDirectory {
     }
 
     public PRC searchPRC(String name){
+        if(PRCList==null){
+            return null;
+        }
         for(PRC prc:PRCList){
             if(prc.getName().equals(name)){
                 return prc;

@@ -50,7 +50,6 @@ public class CareCenterSystem extends Organization{
     private BabyDirectory babyDirectory;
     private HospitalContactDirectory hospitalContactDirectory;
     private PEDocDirectory PEdocDirectory;
-    private HospitalContactDirectory hospitalcontactDirectory;
     private PRCContactDirectory PRCcontactDirectory;
     private BabyNurseDirectory babyNurseDirectory;
     private GODNurseDirectory godNurseDirectory;
@@ -97,13 +96,6 @@ public class CareCenterSystem extends Organization{
         this.PRCcontactDirectory = PRCcontactDirectory;
     }
 
-    public HospitalContactDirectory getHospitalcontactDirectory() {
-        return hospitalcontactDirectory;
-    }
-
-    public void setHospitalcontactDirectory(HospitalContactDirectory hospitalcontactDirectory) {
-        this.hospitalcontactDirectory = hospitalcontactDirectory;
-    }
 
     public PEDocDirectory getPEdocDirectory() {
         return PEdocDirectory;
@@ -241,6 +233,10 @@ public class CareCenterSystem extends Organization{
         this.communityList = communityList;
         this.babyDirectory = babyDirectory;
         this.hospitalContactDirectory = hospitalContactDirectory;
+        this.babyNurseDirectory = new BabyNurseDirectory();
+        this.godNurseDirectory = new GODNurseDirectory();
+        this.pregnantInfoDirectory = new PregnantInfoDirectory();
+        this.babyInfoDirectory = new BabyInfoDirectory();
     }
 
     @Override

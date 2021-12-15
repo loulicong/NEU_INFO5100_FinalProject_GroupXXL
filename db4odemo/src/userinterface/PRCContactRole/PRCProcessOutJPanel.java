@@ -159,8 +159,8 @@ public class PRCProcessOutJPanel extends JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        PRCProcessOutJPanel dwjp = (PRCProcessOutJPanel) component;
-        dwjp.populateTable();
+        PRCContactMain dwjp = (PRCContactMain) component;
+        dwjp.populateRequestTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_BackbtnActionPerformed

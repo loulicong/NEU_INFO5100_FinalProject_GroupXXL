@@ -41,6 +41,9 @@ public class GODocDirectory {
     }
 
     public GODoc search(String usrname){
+        if (GODocArrayList==null){
+            return null;
+        }
         for(GODoc go:GODocArrayList){
             if(go.getUsrname().equals(usrname)){
                 return go;
